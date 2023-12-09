@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/league.css'
 import useNotifications from "../hooks/useNotifications";
 import Container from "react-bootstrap/Container";
@@ -13,6 +14,7 @@ import Game from "../../game/components/Game";
 import Home from "../../home/components/Home";
 import Loading from "../../common/components/Loading";
 import {NotificationData} from "../model/NotificationData";
+import Login from "../../login/components/Login";
 
 export interface NotificationContextType {
   newNotification(notify: NotificationData): void;
@@ -60,6 +62,7 @@ function League() {
                 <Route path="*" element={<Home />} />
                 <Route path="/home/*" element={<Home />} />
                 <Route path="/current-game" element={<Game />} />
+                <Route path='/login' element={<Login />} />
               </Routes>
             </Col>
           </Row>

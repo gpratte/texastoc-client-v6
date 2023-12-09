@@ -10,3 +10,18 @@ export const getRandomInt = (min: number, max: number) => {
 export const getRandomBoolean = () => {
   return getRandomInt(0, 2) === 1;
 }
+
+export function getToken(): string {
+  return localStorage.getItem('token') as string;
+}
+
+export function setToken(token: string) {
+  return localStorage.setItem('token', token);
+}
+
+export function shouldRedirect() {
+  if (!getToken()) {
+    return '/login';
+  }
+  return '';
+}
