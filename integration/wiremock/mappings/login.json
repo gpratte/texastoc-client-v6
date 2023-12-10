@@ -1,0 +1,24 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/v4/login",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "email": "admin@texastoc.com",
+              "password": "password"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "token": "123456789"
+        }
+      }
+    }
+  ]
+}
