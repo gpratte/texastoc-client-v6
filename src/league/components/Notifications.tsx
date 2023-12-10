@@ -1,6 +1,6 @@
 import {Button, ListGroup, Offcanvas} from "react-bootstrap";
 import React from "react";
-import {NotificationData} from "../model/NotificationData";
+import {NotificationData} from "../model/NotificationDataBuilder";
 
 function Notifications(props: {show: boolean,
   hide: () => void,

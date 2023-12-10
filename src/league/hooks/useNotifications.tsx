@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {NotificationData, NotificationType} from "../model/NotificationData";
+import {NotificationData, NotificationDataBuilder, NotificationType} from "../model/NotificationDataBuilder";
 
 function useNotifications(delay = 2500) {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
@@ -53,7 +53,10 @@ function useNotifications(delay = 2500) {
   // toggle the toast
   useEffect(() => {
     let interval = setInterval(() => {
-      newNotification(new NotificationData('uh oh tick' + Date.now(), NotificationType.ERROR));
+      newNotification(new NotificationDataBuilder()
+        .withMessage("tick " + Date.now())
+        .withType(NotificationType.INFO)
+        .build());
     }, delay);
     return () => clearInterval(interval);
   })

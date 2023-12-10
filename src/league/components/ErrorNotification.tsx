@@ -1,7 +1,7 @@
 import {Button, Toast} from "react-bootstrap";
 import {isEmpty} from "lodash";
 import React from "react";
-import {NotificationData} from "../model/NotificationData";
+import {NotificationData} from "../model/NotificationDataBuilder";
 
 function ErrorNotification(props: {notification: NotificationData | undefined,
   deleteNotification: (id: number) => void,

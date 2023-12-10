@@ -13,7 +13,7 @@ import Footer from "./Footer";
 import Game from "../../game/components/Game";
 import Home from "../../home/components/Home";
 import Loading from "../../common/components/Loading";
-import {NotificationData} from "../model/NotificationData";
+import {NotificationData} from "../model/NotificationDataBuilder";
 import Login from "../../login/components/Login";
 
 export interface NotificationContextType {

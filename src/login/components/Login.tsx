@@ -1,15 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import {getToken} from "../../utils/util";
 import {login} from '../loginClient'
 import {Form} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import {Link, Navigate} from "react-router-dom";
+import {NotificationContext, NotificationContextType} from "../../league/components/League";
 
 const Login = () => {
 
   // State to support force refresh
   const [, updateState] = React.useState({});
   const forceUpdate = React.useCallback(() => updateState({}), []);
+  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+
   const signIn = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -18,7 +21,7 @@ const Login = () => {
     };
     const email = target.emailId.value;
     const password = target.passwordId.value;
-    login(email, password, forceUpdate);
+    login(email, password, forceUpdate, newNotification);
   }
 
 

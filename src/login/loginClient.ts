@@ -1,7 +1,12 @@
 import {server} from '../utils/api';
 import {setToken} from '../utils/util';
+import {NotificationData, NotificationDataBuilder, NotificationType} from "../league/model/NotificationDataBuilder";
 
-export function login(email: string, password: string, updateFnc: () => void) {
+export function login(email: string,
+                      password: string,
+                      updateLoginToRerender: () => void,
+                      newNotification: (n: NotificationData) => void) {
+
   server.post('/api/v4/login',
     {email: email, password: password},
     {
@@ -9,11 +14,21 @@ export function login(email: string, password: string, updateFnc: () => void) {
     }
   )
     .then(result => {
-      setToken(result.data.token);
-      updateFnc();
+      if (result.data?.token) {
+        setToken(result.data.token);
+        updateLoginToRerender();
+      } else {
+        newNotification(new NotificationDataBuilder()
+          .withMessage("Problem logging in, no token returned")
+          .withType(NotificationType.ERROR)
+          .build());
+      }
     })
     .catch(function (error) {
-      console.log(error.message ? error.message : error.toString());
+      newNotification(new NotificationDataBuilder()
+        .withObj(error)
+        .withMessage("Problem logging in")
+        .build());
     }).finally(() => {
   });
 }
