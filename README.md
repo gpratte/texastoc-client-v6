@@ -20,6 +20,10 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-03-logout
+Make the logout navigation link operational. When clicked the token in local storage
+is removed and the router is navigated to the login screen.
+
 ### step-02-login
 Created the login UI component along with the supporting functions to call the
 server's login endpoint. Keep the token in the browser's local storage. 
