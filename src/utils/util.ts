@@ -19,6 +19,10 @@ export function setToken(token: string) {
   return localStorage.setItem('token', token);
 }
 
+export function clearToken() {
+  return localStorage.removeItem('token');
+}
+
 export function shouldRedirect() {
   if (!getToken()) {
     return '/login';
