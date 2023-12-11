@@ -18,14 +18,15 @@ import Login from "../../login/components/Login";
 
 export interface NotificationContextType {
   newNotification(notify: NotificationData): void;
-  showLoadGlobal(show: boolean): void;
+  toggleLoadingGlobal(show: boolean): void;
+  isGlobalLoading: boolean;
 }
 export const NotificationContext = createContext<NotificationContextType | null>(null);
 
 function League() {
   const {
     newNotification,
-    showLoadGlobal,
+    toggleLoadingGlobal,
     notification,
     notifications,
     showNotifications,
@@ -38,7 +39,7 @@ function League() {
   } = useNotifications(30000);
 
   return (
-    <NotificationContext.Provider value={{newNotification, showLoadGlobal}}>
+    <NotificationContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal}}>
       <div>
         <Loading isLoading={isGlobalLoading}/>
         <Navigation notifications={notifications} showNotifications={showNotificationsPanel}/>

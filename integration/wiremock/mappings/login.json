@@ -55,6 +55,7 @@
         ]
       },
       "response": {
+        "fixedDelayMilliseconds": 5000,
         "fault": "EMPTY_RESPONSE"
       }
     },
