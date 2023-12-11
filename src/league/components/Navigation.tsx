@@ -1,10 +1,19 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import {Badge, Nav, NavDropdown} from "react-bootstrap";
+import {Badge, Button, Nav, NavDropdown} from "react-bootstrap";
 import React from "react";
 import {NotificationData} from "../model/NotificationDataBuilder";
+import {logout} from "../../login/loginClient";
+import {useNavigate} from "react-router-dom";
 
 function Navigation(props: {notifications: Array<NotificationData>, showNotifications: () => void}) {
+
+  const navigate = useNavigate();
+  const signOut = () => {
+    logout();
+    navigate("/login");
+  }
+
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
@@ -16,13 +25,13 @@ function Navigation(props: {notifications: Array<NotificationData>, showNotifica
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             <NavDropdown title={<span><i className="nav-home fa-regular fa-user"></i></span>}>
-              <NavDropdown.Item href="#action/3.1">
-                Logout
+              <NavDropdown.Item>
+                <Button variant="link" onClick={() => signOut()}>Log Out</Button>
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<span><i className="nav-home fa-solid fa-bars"></i></span>}
                          id="collasible-bars-dropdown">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item>
                 Stuff
               </NavDropdown.Item>
             </NavDropdown>

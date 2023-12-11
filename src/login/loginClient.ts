@@ -1,11 +1,11 @@
 import {server} from '../utils/api';
-import {setToken} from '../utils/util';
+import {setToken, clearToken} from '../utils/util';
 import {NotificationData, NotificationDataBuilder, NotificationType} from "../league/model/NotificationDataBuilder";
 
 export function login(email: string,
                       password: string,
                       updateLoginToRerender: () => void,
-                      newNotification: (n: NotificationData) => void) {
+                      newNotification: (n: NotificationData) => void): void {
 
   server.post('/api/v4/login',
     {email: email, password: password},
@@ -31,4 +31,8 @@ export function login(email: string,
         .build());
     }).finally(() => {
   });
+}
+
+export function logout(): void {
+  clearToken();
 }
