@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-04-logout-spinner
+Show a spinner while waiting for the login api to finish.
+
 ### step-03-logout
 Make the logout navigation link operational. When clicked the token in local storage
 is removed and the router is navigated to the login screen.

@@ -46,7 +46,7 @@ function useNotifications(delay = 2500) {
     setShowNotifications(false);
   }
 
-  const showLoadGlobal = (show: boolean): void => {
+  const toggleLoadingGlobal = (show: boolean): void => {
     setIsGlobalLoading(show);
   }
 
@@ -72,7 +72,7 @@ function useNotifications(delay = 2500) {
     showNotificationsPanel,
     hideNotificationsPanel,
     isGlobalLoading,
-    showLoadGlobal
+    toggleLoadingGlobal
   };
 }
 

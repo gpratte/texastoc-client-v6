@@ -8,10 +8,7 @@ import {NotificationContext, NotificationContextType} from "../../league/compone
 
 const Login = () => {
 
-  // State to support force refresh
-  const [, updateState] = React.useState({});
-  const forceUpdate = React.useCallback(() => updateState({}), []);
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {toggleLoadingGlobal, newNotification} = useContext(NotificationContext) as NotificationContextType;
 
   const signIn = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -21,9 +18,9 @@ const Login = () => {
     };
     const email = target.emailId.value;
     const password = target.passwordId.value;
-    login(email, password, forceUpdate, newNotification);
+    toggleLoadingGlobal(true);
+    login(email, password, toggleLoadingGlobal, newNotification);
   }
-
 
   if (getToken()) {
     return (

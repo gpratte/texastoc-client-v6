@@ -4,7 +4,7 @@ import {NotificationData, NotificationDataBuilder, NotificationType} from "../le
 
 export function login(email: string,
                       password: string,
-                      updateLoginToRerender: () => void,
+                      toggleLoadingGlobal: (b: boolean) => void,
                       newNotification: (n: NotificationData) => void): void {
 
   server.post('/api/v4/login',
@@ -16,7 +16,6 @@ export function login(email: string,
     .then(result => {
       if (result.data?.token) {
         setToken(result.data.token);
-        updateLoginToRerender();
       } else {
         newNotification(new NotificationDataBuilder()
           .withMessage("Problem logging in, no token returned")
@@ -30,6 +29,7 @@ export function login(email: string,
         .withMessage("Problem logging in")
         .build());
     }).finally(() => {
+    toggleLoadingGlobal(false);
   });
 }
 
