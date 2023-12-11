@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {NotificationContext} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
 import { GameData } from "../model/GameData";
-import {NotificationData} from "../../league/model/NotificationData";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {NotificationContextType} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import refreshGameAction from "../redux/refreshGameAction";
@@ -23,7 +23,10 @@ function useGame() {
         gameData.numPaidPlayers = Math.random();
         leagueStore.dispatch(refreshGameAction(gameData));
       } catch (error) {
-        newNotification(NotificationData.fromObject(error));
+        newNotification(new NotificationDataBuilder()
+          .withObj(error)
+          .withMessage("Problem getting game")
+          .build());
       } finally {
         setIsLoading(false);
       }
@@ -41,7 +44,10 @@ function useGame() {
       gameData.numPaidPlayers = Math.random();
       leagueStore.dispatch(refreshGameAction(gameData));
     } catch (error) {
-      newNotification(NotificationData.fromObject(error));
+      newNotification(new NotificationDataBuilder()
+        .withObj(error)
+        .withMessage("Problem getting game")
+        .build());
     } finally {
       setIsLoading(false);
     }

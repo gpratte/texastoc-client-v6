@@ -3,7 +3,7 @@ import {GameContext, GameContextType} from "../components/Game";
 import {NotificationContext, NotificationContextType} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
 import {GamePlayerData} from "../model/GamePlayerData";
-import {NotificationData} from "../../league/model/NotificationData";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 
 function useEditPlayer(gamePlayer: GamePlayerData) {
 
@@ -35,7 +35,10 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
     try {
       await gameClient.deletePlayer(game.id, gamePlayerId);
     } catch (error) {
-      newNotification(NotificationData.fromObject(error));
+      newNotification(new NotificationDataBuilder()
+        .withObj(error)
+        .withMessage("Problem deleting player")
+        .build());
     }
     refreshGame();
   }
@@ -44,7 +47,10 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
     try {
       await gameClient.updatePlayer(gamePlayer);
     } catch (error) {
-      newNotification(NotificationData.fromObject(error));
+      newNotification(new NotificationDataBuilder()
+        .withObj(error)
+        .withMessage("Problem updating player")
+        .build());
     }
     refreshGame();
   }

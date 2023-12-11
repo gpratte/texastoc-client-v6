@@ -6,7 +6,7 @@ import gameClient from "../../clients/gameClient";
 import playerClient from "../../clients/playerClient";
 import {PlayerData} from "../../player/model/PlayerData";
 import {SeasonPlayerData} from "../../season/model/SeasonPlayerData";
-import {NotificationData} from "../../league/model/NotificationData";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 
 function useAddPlayer() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -29,7 +29,10 @@ function useAddPlayer() {
           return leaguePlayers
         });
       } catch (error) {
-        newNotification(NotificationData.fromObject(error));
+        newNotification(new NotificationDataBuilder()
+          .withObj(error)
+          .withMessage("Problem getting league players")
+          .build());
       }
       try {
         const season = await seasonClient.getSeason(game.seasonId);
@@ -37,7 +40,10 @@ function useAddPlayer() {
           setSeasonPlayers(season.players);
         }
       } catch (error) {
-        newNotification(NotificationData.fromObject(error));
+        newNotification(new NotificationDataBuilder()
+          .withObj(error)
+          .withMessage("Problem getting season")
+          .build());
       }
       setIsLoading(false);
     }
@@ -67,7 +73,10 @@ function useAddPlayer() {
         //   qToc: e.target.elements.qtocId.checked
         // });
       } catch (error) {
-        newNotification(NotificationData.fromObject(error));
+        newNotification(new NotificationDataBuilder()
+          .withObj(error)
+          .withMessage("Problem adding player to the game")
+          .build());
       }
     } else {
       if (!e.target.elements.firstNameId.value && !e.target.elements.lastNameId.value) {
@@ -88,7 +97,10 @@ function useAddPlayer() {
         //     e.target.elements.tocId.checked,
         //     e.target.elements.qtocId.checked);
       } catch (error) {
-        newNotification(NotificationData.fromObject(error));
+        newNotification(new NotificationDataBuilder()
+          .withObj(error)
+          .withMessage("Problem adding player to the game")
+          .build());
       }
     }
     refreshGame();

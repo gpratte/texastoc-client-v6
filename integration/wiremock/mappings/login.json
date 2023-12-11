@@ -1,0 +1,79 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/v4/login",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "email": "admin@texastoc.com",
+              "password": "password"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "token": "123456789"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/v4/login",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "email": "delay5000@texastoc.com",
+              "password": "password"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "fixedDelayMilliseconds": 5000,
+        "jsonBody": {
+          "token": "123456789"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/v4/login",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "email": "emptyresponse@texastoc.com",
+              "password": "password"
+            }
+          }
+        ]
+      },
+      "response": {
+        "fault": "EMPTY_RESPONSE"
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "urlPath": "/api/v4/login",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "email": "401@texastoc.com",
+              "password": "password"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 401
+      }
+    }
+  ]
+}
