@@ -20,7 +20,11 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
-### step 01 clone react-poker-game-2023-09-22
+### step-02-login
+Created the login UI component along with the supporting functions to call the
+server's login endpoint. Keep the token in the browser's local storage. 
+
+### step-01-clone-react-poker-game-2023-09-22
 Initial version is a clone of [react-poker-game-2023-09-22](https://github.com/gpratte/react-poker-game-2023-09-22) 
 
 
