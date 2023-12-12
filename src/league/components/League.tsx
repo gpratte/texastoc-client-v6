@@ -10,8 +10,9 @@ import Navigation from "./Navigation";
 import ErrorNotification from "./ErrorNotification";
 import Notifications from "./Notifications";
 import Footer from "./Footer";
-import Game from "../../game/components/Game";
 import Home from "../../home/components/Home";
+import Game from "../../game/components/Game";
+import Season from "../../season/components/Season";
 import Loading from "../../common/components/Loading";
 import {NotificationData} from "../model/NotificationDataBuilder";
 import Login from "../../login/components/Login";
@@ -62,8 +63,9 @@ function League() {
               <Routes>
                 <Route path="*" element={<Home />} />
                 <Route path="/home/*" element={<Home />} />
-                <Route path="/current-game" element={<Game />} />
                 <Route path='/login' element={<Login />} />
+                <Route path="/current-game" element={<Game />} />
+                <Route path="/season" element={<Season />} />
               </Routes>
             </Col>
           </Row>

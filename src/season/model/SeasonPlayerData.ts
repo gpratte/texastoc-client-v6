@@ -1,4 +1,4 @@
-import _, {entries} from "lodash";
+import _ from "lodash";
 
 export class SeasonPlayerData {
     id: number;

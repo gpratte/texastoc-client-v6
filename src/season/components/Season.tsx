@@ -1,0 +1,91 @@
+import React from "react";
+import {connect} from "react-redux";
+import _ from "lodash";
+import {convertDateToMoment} from "../seasonUtils";
+import {Link} from "react-router-dom";
+import {Accordion, Button, Card} from "react-bootstrap";
+import {SeasonData} from "../model/SeasonData";
+import SeasonDetails from "./SeasonDetails";
+import useSeason from "../hooks/useSeason";
+
+// @ts-ignore
+function Season(props) {
+  const season: SeasonData | undefined = props.season;
+  // const quarterlySeasons: SeasonData | undefined = props.quarterlySeasons;
+  // const games: SeasonData | undefined = props.games;
+
+  const {
+    isLoading
+  } = useSeason(season?.id || 0);
+
+  if (_.isEmpty(season)) {
+    return (
+      <>
+        <h1>No Season</h1>
+        <p>
+          <Link to="/season/new">
+            <Button variant="outline-secondary"> Create a new season </Button>
+          </Link>
+        </p>
+      </>
+    )
+  }
+
+  const startDate = convertDateToMoment(season.start);
+  const endedDate = convertDateToMoment(season.ended);
+  //const numGuarenteed = numGuarenteedPayouts(season);
+
+  return (
+    <>
+      <h3>{'' + startDate + ' - '  + endedDate}</h3>
+      <Accordion>
+        <Card>
+          <Card.Header>
+            <Accordion as={Button} variant="link">
+              Details
+            </Accordion>
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body><SeasonDetails season={season}/></Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+
+      {/*<SeasonStandings value={ {players: season.players, guarenteed: numGuarenteed} }/>*/}
+
+      {
+        // season.estimatedPayouts && season.estimatedPayouts.length > 0 && <p>Estimated Payouts</p>
+      }
+      {
+        // season.estimatedPayouts && season.estimatedPayouts.length > 0 && <SeasonPayouts value={season.estimatedPayouts}/>
+      }
+      {
+        // season.payouts && season.payouts.length > 0 && <SeasonPayouts value={season.payouts}/>
+      }
+
+      {/*<Tabs className="style1" defaultActiveKey="profile" id="uncontrolled-tab-example">*/}
+      {/*  {*/}
+      {/*    quarterlySeasons &&*/}
+      {/*    <Tab className="style2" eventKey="quarters" title="&nbsp;&nbsp;&nbsp;Quarters&nbsp;&nbsp;&nbsp;">*/}
+      {/*      <Quarters value={quarterlySeasons}/>*/}
+      {/*    </Tab>*/}
+      {/*  }*/}
+      {/*  <Tab className="style2" eventKey="games" title="&nbsp;&nbsp;&nbsp;Games&nbsp;&nbsp;&nbsp;">*/}
+      {/*    <Games value={games}/>*/}
+      {/*  </Tab>*/}
+      {/*</Tabs>*/}
+      {/*<Finalize seasonId={season.id} finalized={season.finalized}/>*/}
+    </>
+  )
+}
+
+// @ts-ignore
+function mapStateToProps(state) {
+  return {
+    season: state.season,
+    quarterlySeasons: state.quarterlySeasons,
+    games: state.games
+  };
+}
+
+export default connect(mapStateToProps)(Season);

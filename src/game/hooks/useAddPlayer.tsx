@@ -7,6 +7,7 @@ import playerClient from "../../clients/playerClient";
 import {PlayerData} from "../../player/model/PlayerData";
 import {SeasonPlayerData} from "../../season/model/SeasonPlayerData";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
+import {useNavigate} from "react-router-dom";
 
 function useAddPlayer() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -16,6 +17,7 @@ function useAddPlayer() {
 
   const {game, refreshGame, setShowAddPlayer} = useContext(GameContext) as GameContextType;
   const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function init() {
@@ -35,8 +37,8 @@ function useAddPlayer() {
           .build());
       }
       try {
-        const season = await seasonClient.getSeason(game.seasonId);
-        if (season.players) {
+        const season = await seasonClient.getSeason(game.seasonId, newNotification, navigate);
+        if (season && season.players) {
           setSeasonPlayers(season.players);
         }
       } catch (error) {
