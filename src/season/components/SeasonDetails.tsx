@@ -1,4 +1,4 @@
-import {SeasonData} from "../model/SeasonData";
+import {SeasonData} from "../model/SeasonDataTypes";
 import {Table} from "react-bootstrap";
 import {convertDateToMoment} from "../seasonUtils";
 

@@ -4,7 +4,7 @@ import _ from "lodash";
 import {GameContext, GameContextType} from "./Game";
 import useAddPlayer from "../hooks/useAddPlayer";
 import {PlayerData} from "../../player/model/PlayerData";
-import {SeasonPlayerData} from "../../season/model/SeasonPlayerData";
+import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {GamePlayerData} from "../model/GamePlayerData";
 
 function AddPlayer() {
@@ -76,8 +76,9 @@ function AddPlayer() {
 
     // Separator
     if (seasonPlayersFiltered && seasonPlayersFiltered.length > 0) {
-      const separator =
-        SeasonPlayerData.fromObj({id: 0, playerId: 0, seasonId: 0, name: '----------------------'});
+      const separator: SeasonPlayerData =
+        {id: 0, playerId: 0, seasonId: 0, name: '----------------------',
+         entries: 0, points: 0, place: 0, forfeit: false};
       seasonPlayersFiltered.push(separator);
     }
 

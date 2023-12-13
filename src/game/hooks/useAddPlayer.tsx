@@ -5,7 +5,7 @@ import {NotificationContext, NotificationContextType} from "../../league/compone
 import gameClient from "../../clients/gameClient";
 import playerClient from "../../clients/playerClient";
 import {PlayerData} from "../../player/model/PlayerData";
-import {SeasonPlayerData} from "../../season/model/SeasonPlayerData";
+import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
 

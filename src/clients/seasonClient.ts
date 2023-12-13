@@ -1,4 +1,4 @@
-import {SeasonData} from "../season/model/SeasonData";
+import {SeasonData} from "../season/model/SeasonDataTypes";
 import {server} from "../utils/api";
 import {getToken, clearToken} from '../utils/util';
 import {NotificationData, NotificationDataBuilder, NotificationType} from "../league/model/NotificationDataBuilder";

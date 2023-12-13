@@ -4,7 +4,7 @@ import _ from "lodash";
 import {convertDateToMoment} from "../seasonUtils";
 import {Link} from "react-router-dom";
 import {Accordion, Button, Card} from "react-bootstrap";
-import {SeasonData} from "../model/SeasonData";
+import {SeasonData} from "../model/SeasonDataTypes";
 import SeasonDetails from "./SeasonDetails";
 import useSeason from "../hooks/useSeason";
 
@@ -33,7 +33,6 @@ function Season(props) {
 
   const startDate = convertDateToMoment(season.start);
   const endedDate = convertDateToMoment(season.ended);
-  //const numGuarenteed = numGuarenteedPayouts(season);
 
   return (
     <>

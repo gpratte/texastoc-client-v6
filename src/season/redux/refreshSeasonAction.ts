@@ -1,4 +1,4 @@
-import {SeasonData} from "../model/SeasonData";
+import {SeasonData} from "../model/SeasonDataTypes";
 import {SeasonActionTypes} from "./seasonActionTypes"
 
 export type RefreshSeasonAction = {
