@@ -39,16 +39,12 @@ function Season(props) {
     <>
       <h3>{'' + startDate + ' - '  + endedDate}</h3>
       <Accordion>
-        <Card>
-          <Card.Header>
-            <Accordion as={Button} variant="link">
-              Details
-            </Accordion>
-          </Card.Header>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body><SeasonDetails season={season}/></Card.Body>
-          </Accordion.Collapse>
-        </Card>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Details</Accordion.Header>
+          <Accordion.Body>
+            <SeasonDetails season={season}/>
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
 
       {/*<SeasonStandings value={ {players: season.players, guarenteed: numGuarenteed} }/>*/}
