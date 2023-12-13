@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {Accordion, Button, Card} from "react-bootstrap";
 import {SeasonData} from "../model/SeasonDataTypes";
 import SeasonDetails from "./SeasonDetails";
+import SeasonStandings from "./SeasonStandings";
 import useSeason from "../hooks/useSeason";
 
 // @ts-ignore
@@ -46,17 +47,7 @@ function Season(props) {
         </Accordion.Item>
       </Accordion>
 
-      {/*<SeasonStandings value={ {players: season.players, guarenteed: numGuarenteed} }/>*/}
-
-      {
-        // season.estimatedPayouts && season.estimatedPayouts.length > 0 && <p>Estimated Payouts</p>
-      }
-      {
-        // season.estimatedPayouts && season.estimatedPayouts.length > 0 && <SeasonPayouts value={season.estimatedPayouts}/>
-      }
-      {
-        // season.payouts && season.payouts.length > 0 && <SeasonPayouts value={season.payouts}/>
-      }
+      <SeasonStandings players={ season.players }/>
 
       {/*<Tabs className="style1" defaultActiveKey="profile" id="uncontrolled-tab-example">*/}
       {/*  {*/}
