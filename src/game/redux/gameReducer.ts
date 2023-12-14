@@ -1,4 +1,4 @@
-import {GameData} from "../model/GameData";
+import {GameData} from "../model/GameDataTypes";
 import {RefreshGameAction} from "./refreshGameAction";
 import {GameActionTypes} from "./gameActionTypes"
 

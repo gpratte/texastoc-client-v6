@@ -1,9 +1,9 @@
-import {SeasonData} from "../season/model/SeasonDataTypes";
 import {server} from "../utils/api";
+import axios, {AxiosError} from "axios";
+import {SeasonData} from "../season/model/SeasonDataTypes";
 import {getToken, clearToken} from '../utils/util';
 import {NotificationData} from "../league/model/NotificationDataBuilder";
 import {NavigateFunction} from "react-router-dom";
-import axios, {AxiosError} from "axios";
 
 const seasonClient = {
   // TODO remove the first parameter

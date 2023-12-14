@@ -7,7 +7,7 @@ import {useRef} from "react";
 import Container from "react-bootstrap/Container";
 import useEditPlayer from "../hooks/useEditPlayer";
 import ErrorBoundary from "../../common/components/ErrorBoundry";
-import {GamePlayerData} from "../model/GamePlayerData";
+import {GamePlayerData} from "../model/GameDataTypes";
 function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>}) {
 
   const accordionRef = useRef(null);
@@ -157,21 +157,22 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
                   </Button>
                 </Col>
                 <Col>
-                  <Button variant="primary" onClick={() => {
-                    updateGamePlayer(GamePlayerData.fromObj({
-                      buyin: buyInChecked,
-                      rebuy: rebuyChecked,
-                      annual: annualTocChecked,
-                      quarterly: qTocChecked,
-                      alert: alertChecked,
-                      place: place,
-                      chop: chop}));
-                    // must come after getting the state because the click will reset the state
-                    // @ts-ignore
-                    accordionRef.current.click();
-                  }}>
-                    Update
-                  </Button>
+                  {/*TODO*/}
+                  {/*<Button variant="primary" onClick={() => {*/}
+                  {/*  updateGamePlayer(GamePlayerData.fromObj({*/}
+                  {/*    buyin: buyInChecked,*/}
+                  {/*    rebuy: rebuyChecked,*/}
+                  {/*    annual: annualTocChecked,*/}
+                  {/*    quarterly: qTocChecked,*/}
+                  {/*    alert: alertChecked,*/}
+                  {/*    place: place,*/}
+                  {/*    chop: chop}));*/}
+                  {/*  // must come after getting the state because the click will reset the state*/}
+                  {/*  // @ts-ignore*/}
+                  {/*  accordionRef.current.click();*/}
+                  {/*}}>*/}
+                  {/*  Update*/}
+                  {/*</Button>*/}
                 </Col>
               </Row>
             </Container>

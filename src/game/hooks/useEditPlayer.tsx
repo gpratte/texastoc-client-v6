@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {GameContext, GameContextType} from "../components/Game";
 import {NotificationContext, NotificationContextType} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
-import {GamePlayerData} from "../model/GamePlayerData";
+import {GamePlayerData} from "../model/GameDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 
 function useEditPlayer(gamePlayer: GamePlayerData) {

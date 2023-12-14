@@ -1,9 +1,9 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import QuarterlySeasonStandings from "./QuarterlySeasonStandings";
-import Payouts from "./Payouts";
-import {QuarterlySeasonData} from "../model/QuarterlySeasonDataTypes";
-import {convertDateToMoment} from "../seasonUtils";
+import Payouts from "../Payouts";
+import {QuarterlySeasonData} from "../../model/QuarterlySeasonDataTypes";
+import {convertDateToMoment} from "../../../utils/util";
 
 // @ts-ignore
 function QuarterlySeason(props) {

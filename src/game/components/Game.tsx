@@ -6,7 +6,7 @@ import '../../common/style/common.css'
 import {Accordion} from "react-bootstrap";
 import GamePlayers from "./GamePlayers";
 import Loading from "../../common/components/Loading";
-import {GameData} from "../model/GameData";
+import {GameData} from "../model/GameDataTypes";
 import _ from "lodash";
 
 export interface GameContextType {
@@ -27,7 +27,7 @@ function Game(props:{game:GameData}) {
     isLoading,
     showAddPlayer,
     setShowAddPlayer
-  } = useGame();
+  } = useGame(game.id);
 
   const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(true)
 

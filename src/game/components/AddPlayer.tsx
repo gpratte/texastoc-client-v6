@@ -5,7 +5,7 @@ import {GameContext, GameContextType} from "./Game";
 import useAddPlayer from "../hooks/useAddPlayer";
 import {PlayerData} from "../../player/model/PlayerData";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
-import {GamePlayerData} from "../model/GamePlayerData";
+import {GamePlayerData} from "../model/GameDataTypes";
 
 function AddPlayer() {
 

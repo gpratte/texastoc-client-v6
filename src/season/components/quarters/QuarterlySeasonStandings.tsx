@@ -1,5 +1,5 @@
 import React from "react";
-import {QuartlerySeasonPlayerData} from "../model/QuarterlySeasonDataTypes";
+import {QuartlerySeasonPlayerData} from "../../model/QuarterlySeasonDataTypes";
 import Table from "react-bootstrap/Table";
 
 // @ts-ignore

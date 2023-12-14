@@ -1,6 +1,6 @@
 import {SeasonData} from "../model/SeasonDataTypes";
 import {Table} from "react-bootstrap";
-import {convertDateToMoment} from "../seasonUtils";
+import {convertDateToMoment} from "../../utils/util";
 
 // @ts-ignore
 export default function SeasonDetails(props) {

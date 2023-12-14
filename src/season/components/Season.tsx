@@ -1,14 +1,16 @@
 import React from "react";
+import './season.css';
 import {connect} from "react-redux";
 import _ from "lodash";
-import {convertDateToMoment} from "../seasonUtils";
 import {Link} from "react-router-dom";
 import {Accordion, Button, Tab, Tabs} from "react-bootstrap";
 import {SeasonData} from "../model/SeasonDataTypes";
 import SeasonDetails from "./SeasonDetails";
 import SeasonStandings from "./SeasonStandings";
-import Quarters from "./Quarters";
+import Quarters from "./quarters/Quarters";
 import useSeason from "../hooks/useSeason";
+import Games from "./games/Games";
+import {convertDateToMoment} from "../../utils/util";
 
 // @ts-ignore
 function Season(props) {
@@ -52,9 +54,9 @@ function Season(props) {
         <Tab className="style2" eventKey="quarters" title="&nbsp;&nbsp;&nbsp;Quarters&nbsp;&nbsp;&nbsp;">
           <Quarters seasonId={season.id}/>
         </Tab>
-        {/*<Tab className="style2" eventKey="games" title="&nbsp;&nbsp;&nbsp;Games&nbsp;&nbsp;&nbsp;">*/}
-        {/*  <Games value={games}/>*/}
-        {/*</Tab>*/}
+        <Tab className="style2" eventKey="games" title="&nbsp;&nbsp;&nbsp;Games&nbsp;&nbsp;&nbsp;">
+          <Games seasonId={season.id}/>
+        </Tab>
       </Tabs>
       {/*<Finalize seasonId={season.id} finalized={season.finalized}/>*/}
     </>
