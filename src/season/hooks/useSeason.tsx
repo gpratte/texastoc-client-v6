@@ -12,8 +12,6 @@ function useSeason(seasonId: number) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('useSeason.useEffect entered')
-
     async function init() {
       try {
         setIsLoading(true);

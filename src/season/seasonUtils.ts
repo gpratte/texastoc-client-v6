@@ -1,4 +1,3 @@
-import {SeasonData} from "./model/SeasonDataTypes";
 import moment from "moment-timezone";
 
 export function convertDateToMoment(dateAry: Array<number>) {

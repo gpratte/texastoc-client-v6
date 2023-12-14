@@ -1,16 +1,17 @@
 import {SeasonData} from "../season/model/SeasonDataTypes";
 import {server} from "../utils/api";
 import {getToken, clearToken} from '../utils/util';
-import {NotificationData, NotificationDataBuilder, NotificationType} from "../league/model/NotificationDataBuilder";
+import {NotificationData} from "../league/model/NotificationDataBuilder";
 import {NavigateFunction} from "react-router-dom";
 import axios, {AxiosError} from "axios";
 
 const seasonClient = {
+  // TODO remove the first parameter
   getCurrentSeasonId: async (newNotification: (n: NotificationData) => void, navigate: NavigateFunction): Promise<number> => {
     // TODO what to do if there is no token?
     const token = getToken();
     if (!token) {
-      console.log("no token");
+      navigate("/login");
       return 0;
     }
     try {
@@ -19,7 +20,6 @@ const seasonClient = {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(result)
       if (result.data.length > 0) {
         const season: SeasonData = result.data[result.data.length - 1];
         return season.id;
@@ -27,7 +27,7 @@ const seasonClient = {
       return 0;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((<AxiosError>error).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -42,7 +42,7 @@ const seasonClient = {
     // TODO what to do if there is no token?
     const token = getToken();
     if (!token) {
-      console.log("no token");
+      navigate("/login");
       return null;
     }
     try {
@@ -51,11 +51,10 @@ const seasonClient = {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(result)
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((<AxiosError>error).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");

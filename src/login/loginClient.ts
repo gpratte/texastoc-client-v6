@@ -2,6 +2,7 @@ import {server} from '../utils/api';
 import {setToken, clearToken} from '../utils/util';
 import {NotificationData, NotificationDataBuilder, NotificationType} from "../league/model/NotificationDataBuilder";
 
+// TODO  move to the clients directory
 export function login(email: string,
                       password: string,
                       toggleLoadingGlobal: (b: boolean) => void,

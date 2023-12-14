@@ -1,0 +1,195 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/v4/seasons/1/quarterlies"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": 13,
+            "seasonId": 1,
+            "start": [2023,5,1],
+            "ended": [2023,7,31],
+            "quarter": "FIRST",
+            "numPayouts": 3,
+            "lastCalculated": "2023-07-28T04:54:32",
+            "numGames": 13,
+            "numGamesPlayed": 12,
+            "finalized": false,
+            "players": [
+              {
+                "id": 802,
+                "playerId": 14,
+                "seasonId": 1,
+                "name": "Kyle Stein",
+                "entries": 11,
+                "points": 386,
+                "place": 1,
+                "qseasonId": 13
+              },
+              {
+                "id": 803,
+                "playerId": 16,
+                "seasonId": 1,
+                "name": "Paulie Schuman",
+                "entries": 10,
+                "points": 238,
+                "place": 2,
+                "qseasonId": 13
+              },
+              {
+                "id": 804,
+                "playerId": 9,
+                "seasonId": 1,
+                "name": "Freddy Murphy",
+                "entries": 3,
+                "points": 39,
+                "place": 3,
+                "qseasonId": 13
+              },
+              {
+                "id": 805,
+                "playerId": 4,
+                "seasonId": 1,
+                "name": "Beau Edge",
+                "entries": 1,
+                "points": 0,
+                "place": null,
+                "qseasonId": 13
+              }
+            ],
+            "payouts": [
+              {
+                "id": 427,
+                "seasonId": 1,
+                "place": 1,
+                "amount": 250,
+                "qseasonId": 13
+              },
+              {
+                "id": 428,
+                "seasonId": 1,
+                "place": 2,
+                "amount": 150,
+                "qseasonId": 13
+              },
+              {
+                "id": 429,
+                "seasonId": 1,
+                "place": 3,
+                "amount": 100,
+                "qseasonId": 13
+              }
+            ],
+            "qtocPerGameCost": 20,
+            "qtocCollected": 500
+          },
+          {
+            "id": 14,
+            "seasonId": 1,
+            "start": [2023,8,1],
+            "ended": [2023,10,31],
+            "quarter": "SECOND",
+            "numPayouts": 3,
+            "lastCalculated": "2023-10-27T08:12:21",
+            "numGames": 13,
+            "numGamesPlayed": 13,
+            "finalized": false,
+            "players": [
+              {
+                "id": 854,
+                "playerId": 16,
+                "seasonId": 1,
+                "name": "Paulie Schuman",
+                "entries": 11,
+                "points": 356,
+                "place": 1,
+                "qseasonId": 14
+              },
+              {
+                "id": 855,
+                "playerId": 9,
+                "seasonId": 1,
+                "name": "Freddy Murphy",
+                "entries": 10,
+                "points": 347,
+                "place": 2,
+                "qseasonId": 14
+              },
+              {
+                "id": 856,
+                "playerId": 14,
+                "seasonId": 1,
+                "name": "Kyle Stein",
+                "entries": 9,
+                "points": 283,
+                "place": 3,
+                "qseasonId": 14
+              }
+            ],
+            "payouts": [
+              {
+                "id": 478,
+                "seasonId": 1,
+                "place": 1,
+                "amount": 300,
+                "qseasonId": 14
+              },
+              {
+                "id": 479,
+                "seasonId": 1,
+                "place": 2,
+                "amount": 180,
+                "qseasonId": 14
+              },
+              {
+                "id": 480,
+                "seasonId": 1,
+                "place": 3,
+                "amount": 120,
+                "qseasonId": 14
+              }
+            ],
+            "qtocPerGameCost": 20,
+            "qtocCollected": 600
+          },
+          {
+            "id": 15,
+            "seasonId": 1,
+            "start": [2023,11,1],
+            "ended": [2024,1,31],
+            "quarter": "THIRD",
+            "numPayouts": 3,
+            "lastCalculated": "2023-12-08T03:09:19",
+            "numGames": 13,
+            "numGamesPlayed": 3,
+            "finalized": false,
+            "players": [],
+            "payouts": [],
+            "qtocPerGameCost": 20,
+            "qtocCollected": 0
+          },
+          {
+            "id": 16,
+            "seasonId": 1,
+            "start": [2024,2,1],
+            "ended": [2024,4,30],
+            "quarter": "FOURTH",
+            "numPayouts": 3,
+            "lastCalculated": null,
+            "numGames": 13,
+            "numGamesPlayed": 0,
+            "finalized": false,
+            "players": [],
+            "payouts": [],
+            "qtocPerGameCost": 20,
+            "qtocCollected": 0
+          }
+        ]
+      }
+    }
+  ]
+}

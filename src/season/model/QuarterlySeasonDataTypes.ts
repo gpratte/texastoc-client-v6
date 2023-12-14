@@ -13,14 +13,16 @@ export type QuarterlySeasonPayout = {
     seasonId: number;
     place: number;
     amount: number;
+    chopAmount: number;
 }
 export type QuarterlySeasonData = {
     id: number;
     seasonId: number;
-    start: string;
-    ended: string;
+    start: Array<number>;
+    ended: Array<number>;
     quarter: string;
     numPayouts: number;
+    qtocCollected: number;
     numGames: number;
     numGamesPlayed: number;
     finalized: boolean;

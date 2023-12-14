@@ -3,17 +3,16 @@ import {connect} from "react-redux";
 import _ from "lodash";
 import {convertDateToMoment} from "../seasonUtils";
 import {Link} from "react-router-dom";
-import {Accordion, Button, Card} from "react-bootstrap";
+import {Accordion, Button, Tab, Tabs} from "react-bootstrap";
 import {SeasonData} from "../model/SeasonDataTypes";
 import SeasonDetails from "./SeasonDetails";
 import SeasonStandings from "./SeasonStandings";
+import Quarters from "./Quarters";
 import useSeason from "../hooks/useSeason";
 
 // @ts-ignore
 function Season(props) {
   const season: SeasonData | undefined = props.season;
-  // const quarterlySeasons: SeasonData | undefined = props.quarterlySeasons;
-  // const games: SeasonData | undefined = props.games;
 
   const {
     isLoading
@@ -49,17 +48,14 @@ function Season(props) {
 
       <SeasonStandings players={ season.players }/>
 
-      {/*<Tabs className="style1" defaultActiveKey="profile" id="uncontrolled-tab-example">*/}
-      {/*  {*/}
-      {/*    quarterlySeasons &&*/}
-      {/*    <Tab className="style2" eventKey="quarters" title="&nbsp;&nbsp;&nbsp;Quarters&nbsp;&nbsp;&nbsp;">*/}
-      {/*      <Quarters value={quarterlySeasons}/>*/}
-      {/*    </Tab>*/}
-      {/*  }*/}
-      {/*  <Tab className="style2" eventKey="games" title="&nbsp;&nbsp;&nbsp;Games&nbsp;&nbsp;&nbsp;">*/}
-      {/*    <Games value={games}/>*/}
-      {/*  </Tab>*/}
-      {/*</Tabs>*/}
+      <Tabs className="style1" defaultActiveKey="profile" id="uncontrolled-tab-example">
+        <Tab className="style2" eventKey="quarters" title="&nbsp;&nbsp;&nbsp;Quarters&nbsp;&nbsp;&nbsp;">
+          <Quarters seasonId={season.id}/>
+        </Tab>
+        {/*<Tab className="style2" eventKey="games" title="&nbsp;&nbsp;&nbsp;Games&nbsp;&nbsp;&nbsp;">*/}
+        {/*  <Games value={games}/>*/}
+        {/*</Tab>*/}
+      </Tabs>
       {/*<Finalize seasonId={season.id} finalized={season.finalized}/>*/}
     </>
   )
@@ -69,8 +65,6 @@ function Season(props) {
 function mapStateToProps(state) {
   return {
     season: state.season,
-    quarterlySeasons: state.quarterlySeasons,
-    games: state.games
   };
 }
 
