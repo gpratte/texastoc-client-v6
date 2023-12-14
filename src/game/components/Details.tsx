@@ -1,6 +1,6 @@
 import moment from 'moment-timezone'
 import {Table} from "react-bootstrap";
-import {GameData, GamePayout} from "../model/GameData";
+import {GameData, GamePayout} from "../model/GameDataTypes";
 
 
 function Details(props: {game: GameData}) {

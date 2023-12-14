@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-05-season
+Show the season along with its quarterly seasons and games.
+
 ### step-04-logout-spinner
 Show a spinner while waiting for the login api to finish.
 

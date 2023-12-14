@@ -3,7 +3,7 @@ import AddPlayer from "./AddPlayer";
 import {useContext} from "react";
 import {GameContext, GameContextType} from "./Game";
 import EditPlayer from "./EditPlayer";
-import {GamePlayerData} from "../model/GamePlayerData";
+import {GamePlayerData} from "../model/GameDataTypes";
 
 function GamePlayers() {
 

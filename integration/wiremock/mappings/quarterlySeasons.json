@@ -1,0 +1,852 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPath": "/api/v4/seasons/1/quarterlies"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": 1,
+            "seasonId": 1,
+            "start": [
+              2023,
+              5,
+              1
+            ],
+            "ended": [
+              2023,
+              7,
+              31
+            ],
+            "quarter": "FIRST",
+            "numPayouts": 3,
+            "lastCalculated": [
+              2023,
+              12,
+              13,
+              18,
+              16,
+              0,
+              603504000
+            ],
+            "numGames": 13,
+            "numGamesPlayed": 13,
+            "finalized": false,
+            "players": [
+              {
+                "id": 221,
+                "playerId": 6,
+                "seasonId": 1,
+                "name": "Juan Mitchell",
+                "entries": 3,
+                "points": 205,
+                "place": 1,
+                "qseasonId": 1
+              },
+              {
+                "id": 222,
+                "playerId": 16,
+                "seasonId": 1,
+                "name": "Brandon Moore",
+                "entries": 2,
+                "points": 183,
+                "place": 2,
+                "qseasonId": 1
+              },
+              {
+                "id": 223,
+                "playerId": 23,
+                "seasonId": 1,
+                "name": "Stephen Bowman",
+                "entries": 4,
+                "points": 123,
+                "place": 3,
+                "qseasonId": 1
+              },
+              {
+                "id": 224,
+                "playerId": 7,
+                "seasonId": 1,
+                "name": "Marie Herrera",
+                "entries": 3,
+                "points": 115,
+                "place": 4,
+                "qseasonId": 1
+              },
+              {
+                "id": 225,
+                "playerId": 9,
+                "seasonId": 1,
+                "name": "Jack Sullivan",
+                "entries": 2,
+                "points": 112,
+                "place": 5,
+                "qseasonId": 1
+              },
+              {
+                "id": 226,
+                "playerId": 19,
+                "seasonId": 1,
+                "name": "Catherine Moore",
+                "entries": 3,
+                "points": 112,
+                "place": 5,
+                "qseasonId": 1
+              },
+              {
+                "id": 227,
+                "playerId": 2,
+                "seasonId": 1,
+                "name": "David Fuller",
+                "entries": 3,
+                "points": 109,
+                "place": 7,
+                "qseasonId": 1
+              },
+              {
+                "id": 228,
+                "playerId": 8,
+                "seasonId": 1,
+                "name": "Stephanie Gonzalez",
+                "entries": 3,
+                "points": 101,
+                "place": 8,
+                "qseasonId": 1
+              },
+              {
+                "id": 229,
+                "playerId": 30000,
+                "seasonId": 1,
+                "name": "Guest Admin",
+                "entries": 2,
+                "points": 91,
+                "place": 9,
+                "qseasonId": 1
+              },
+              {
+                "id": 230,
+                "playerId": 5,
+                "seasonId": 1,
+                "name": "Kathleen Stone",
+                "entries": 3,
+                "points": 86,
+                "place": 10,
+                "qseasonId": 1
+              },
+              {
+                "id": 231,
+                "playerId": 24,
+                "seasonId": 1,
+                "name": "Monica Porter",
+                "entries": 2,
+                "points": 86,
+                "place": 10,
+                "qseasonId": 1
+              },
+              {
+                "id": 232,
+                "playerId": 1,
+                "seasonId": 1,
+                "name": "Hannah Hicks",
+                "entries": 3,
+                "points": 75,
+                "place": 12,
+                "qseasonId": 1
+              },
+              {
+                "id": 233,
+                "playerId": 25,
+                "seasonId": 1,
+                "name": "Theresa Silva",
+                "entries": 3,
+                "points": 73,
+                "place": 13,
+                "qseasonId": 1
+              },
+              {
+                "id": 234,
+                "playerId": 21,
+                "seasonId": 1,
+                "name": "Sean Ward",
+                "entries": 1,
+                "points": 72,
+                "place": 14,
+                "qseasonId": 1
+              },
+              {
+                "id": 235,
+                "playerId": 18,
+                "seasonId": 1,
+                "name": "Donald Moreno",
+                "entries": 1,
+                "points": 67,
+                "place": 15,
+                "qseasonId": 1
+              },
+              {
+                "id": 236,
+                "playerId": 13,
+                "seasonId": 1,
+                "name": "Donna Marshall",
+                "entries": 1,
+                "points": 66,
+                "place": 16,
+                "qseasonId": 1
+              },
+              {
+                "id": 237,
+                "playerId": 15,
+                "seasonId": 1,
+                "name": "Olivia Barnes",
+                "entries": 2,
+                "points": 47,
+                "place": 17,
+                "qseasonId": 1
+              },
+              {
+                "id": 238,
+                "playerId": 4,
+                "seasonId": 1,
+                "name": "Dennis Evans",
+                "entries": 4,
+                "points": 45,
+                "place": 18,
+                "qseasonId": 1
+              },
+              {
+                "id": 239,
+                "playerId": 14,
+                "seasonId": 1,
+                "name": "Todd Sims",
+                "entries": 1,
+                "points": 39,
+                "place": 19,
+                "qseasonId": 1
+              },
+              {
+                "id": 240,
+                "playerId": 11,
+                "seasonId": 1,
+                "name": "Megan Olson",
+                "entries": 3,
+                "points": 31,
+                "place": 20,
+                "qseasonId": 1
+              },
+              {
+                "id": 241,
+                "playerId": 10000,
+                "seasonId": 1,
+                "name": "Gil Pratte",
+                "entries": 1,
+                "points": 28,
+                "place": 21,
+                "qseasonId": 1
+              },
+              {
+                "id": 242,
+                "playerId": 12,
+                "seasonId": 1,
+                "name": "Pamela Herrera",
+                "entries": 4,
+                "points": 24,
+                "place": 22,
+                "qseasonId": 1
+              },
+              {
+                "id": 243,
+                "playerId": 3,
+                "seasonId": 1,
+                "name": "Annie Burton",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 1
+              },
+              {
+                "id": 244,
+                "playerId": 27,
+                "seasonId": 1,
+                "name": "Diana Reid",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 1
+              },
+              {
+                "id": 245,
+                "playerId": 10,
+                "seasonId": 1,
+                "name": "Glenn Austin",
+                "entries": 2,
+                "points": 0,
+                "qseasonId": 1
+              },
+              {
+                "id": 246,
+                "playerId": 20000,
+                "seasonId": 1,
+                "name": "Guest User",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 1
+              },
+              {
+                "id": 247,
+                "playerId": 17,
+                "seasonId": 1,
+                "name": "Juan Kennedy",
+                "entries": 2,
+                "points": 0,
+                "qseasonId": 1
+              },
+              {
+                "id": 248,
+                "playerId": 26,
+                "seasonId": 1,
+                "name": "Mildred Stewart",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 1
+              },
+              {
+                "id": 249,
+                "playerId": 22,
+                "seasonId": 1,
+                "name": "Susan Cox",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 1
+              }
+            ],
+            "payouts": [
+              {
+                "id": 37,
+                "seasonId": 1,
+                "place": 1,
+                "amount": 630,
+                "qseasonId": 1
+              },
+              {
+                "id": 38,
+                "seasonId": 1,
+                "place": 2,
+                "amount": 378,
+                "qseasonId": 1
+              },
+              {
+                "id": 39,
+                "seasonId": 1,
+                "place": 3,
+                "amount": 252,
+                "qseasonId": 1
+              }
+            ],
+            "qtocCollected": 1260,
+            "qtocPerGameCost": 20
+          },
+          {
+            "id": 2,
+            "seasonId": 1,
+            "start": [
+              2023,
+              8,
+              1
+            ],
+            "ended": [
+              2023,
+              10,
+              31
+            ],
+            "quarter": "SECOND",
+            "numPayouts": 3,
+            "lastCalculated": [
+              2023,
+              12,
+              13,
+              18,
+              16,
+              21,
+              739653000
+            ],
+            "numGames": 13,
+            "numGamesPlayed": 13,
+            "finalized": false,
+            "players": [
+              {
+                "id": 402,
+                "playerId": 5,
+                "seasonId": 1,
+                "name": "Kathleen Stone",
+                "entries": 2,
+                "points": 159,
+                "place": 1,
+                "qseasonId": 2
+              },
+              {
+                "id": 403,
+                "playerId": 10,
+                "seasonId": 1,
+                "name": "Glenn Austin",
+                "entries": 1,
+                "points": 159,
+                "place": 1,
+                "qseasonId": 2
+              },
+              {
+                "id": 404,
+                "playerId": 2,
+                "seasonId": 1,
+                "name": "David Fuller",
+                "entries": 3,
+                "points": 139,
+                "place": 3,
+                "qseasonId": 2
+              },
+              {
+                "id": 405,
+                "playerId": 20,
+                "seasonId": 1,
+                "name": "Dennis Alexander",
+                "entries": 2,
+                "points": 90,
+                "place": 4,
+                "qseasonId": 2
+              },
+              {
+                "id": 406,
+                "playerId": 8,
+                "seasonId": 1,
+                "name": "Stephanie Gonzalez",
+                "entries": 2,
+                "points": 84,
+                "place": 5,
+                "qseasonId": 2
+              },
+              {
+                "id": 407,
+                "playerId": 30000,
+                "seasonId": 1,
+                "name": "Guest Admin",
+                "entries": 1,
+                "points": 74,
+                "place": 6,
+                "qseasonId": 2
+              },
+              {
+                "id": 408,
+                "playerId": 9,
+                "seasonId": 1,
+                "name": "Jack Sullivan",
+                "entries": 2,
+                "points": 70,
+                "place": 7,
+                "qseasonId": 2
+              },
+              {
+                "id": 409,
+                "playerId": 13,
+                "seasonId": 1,
+                "name": "Donna Marshall",
+                "entries": 3,
+                "points": 69,
+                "place": 8,
+                "qseasonId": 2
+              },
+              {
+                "id": 410,
+                "playerId": 18,
+                "seasonId": 1,
+                "name": "Donald Moreno",
+                "entries": 1,
+                "points": 69,
+                "place": 8,
+                "qseasonId": 2
+              },
+              {
+                "id": 411,
+                "playerId": 7,
+                "seasonId": 1,
+                "name": "Marie Herrera",
+                "entries": 2,
+                "points": 62,
+                "place": 10,
+                "qseasonId": 2
+              },
+              {
+                "id": 412,
+                "playerId": 16,
+                "seasonId": 1,
+                "name": "Brandon Moore",
+                "entries": 1,
+                "points": 42,
+                "place": 11,
+                "qseasonId": 2
+              },
+              {
+                "id": 413,
+                "playerId": 20000,
+                "seasonId": 1,
+                "name": "Guest User",
+                "entries": 2,
+                "points": 40,
+                "place": 12,
+                "qseasonId": 2
+              },
+              {
+                "id": 414,
+                "playerId": 17,
+                "seasonId": 1,
+                "name": "Juan Kennedy",
+                "entries": 1,
+                "points": 34,
+                "place": 13,
+                "qseasonId": 2
+              },
+              {
+                "id": 415,
+                "playerId": 25,
+                "seasonId": 1,
+                "name": "Theresa Silva",
+                "entries": 2,
+                "points": 34,
+                "place": 13,
+                "qseasonId": 2
+              },
+              {
+                "id": 416,
+                "playerId": 19,
+                "seasonId": 1,
+                "name": "Catherine Moore",
+                "entries": 2,
+                "points": 27,
+                "place": 15,
+                "qseasonId": 2
+              },
+              {
+                "id": 417,
+                "playerId": 26,
+                "seasonId": 1,
+                "name": "Mildred Stewart",
+                "entries": 1,
+                "points": 25,
+                "place": 16,
+                "qseasonId": 2
+              },
+              {
+                "id": 418,
+                "playerId": 23,
+                "seasonId": 1,
+                "name": "Stephen Bowman",
+                "entries": 1,
+                "points": 21,
+                "place": 17,
+                "qseasonId": 2
+              },
+              {
+                "id": 419,
+                "playerId": 3,
+                "seasonId": 1,
+                "name": "Annie Burton",
+                "entries": 1,
+                "points": 12,
+                "place": 18,
+                "qseasonId": 2
+              },
+              {
+                "id": 420,
+                "playerId": 15,
+                "seasonId": 1,
+                "name": "Olivia Barnes",
+                "entries": 2,
+                "points": 12,
+                "place": 18,
+                "qseasonId": 2
+              },
+              {
+                "id": 421,
+                "playerId": 27,
+                "seasonId": 1,
+                "name": "Diana Reid",
+                "entries": 2,
+                "points": 0,
+                "qseasonId": 2
+              },
+              {
+                "id": 422,
+                "playerId": 10000,
+                "seasonId": 1,
+                "name": "Gil Pratte",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 2
+              },
+              {
+                "id": 423,
+                "playerId": 1,
+                "seasonId": 1,
+                "name": "Hannah Hicks",
+                "entries": 2,
+                "points": 0,
+                "qseasonId": 2
+              },
+              {
+                "id": 424,
+                "playerId": 28,
+                "seasonId": 1,
+                "name": "Robert Woods",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 2
+              },
+              {
+                "id": 425,
+                "playerId": 14,
+                "seasonId": 1,
+                "name": "Todd Sims",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 2
+              }
+            ],
+            "payouts": [
+              {
+                "id": 73,
+                "seasonId": 1,
+                "place": 1,
+                "amount": 390,
+                "qseasonId": 2
+              },
+              {
+                "id": 74,
+                "seasonId": 1,
+                "place": 2,
+                "amount": 234,
+                "qseasonId": 2
+              },
+              {
+                "id": 75,
+                "seasonId": 1,
+                "place": 3,
+                "amount": 156,
+                "qseasonId": 2
+              }
+            ],
+            "qtocCollected": 780,
+            "qtocPerGameCost": 20
+          },
+          {
+            "id": 3,
+            "seasonId": 1,
+            "start": [
+              2023,
+              11,
+              1
+            ],
+            "ended": [
+              2024,
+              1,
+              31
+            ],
+            "quarter": "THIRD",
+            "numPayouts": 3,
+            "lastCalculated": [
+              2023,
+              12,
+              13,
+              18,
+              16,
+              30,
+              353952000
+            ],
+            "numGames": 13,
+            "numGamesPlayed": 5,
+            "finalized": false,
+            "players": [
+              {
+                "id": 442,
+                "playerId": 10,
+                "seasonId": 1,
+                "name": "Glenn Austin",
+                "entries": 1,
+                "points": 102,
+                "place": 1,
+                "qseasonId": 3
+              },
+              {
+                "id": 443,
+                "playerId": 26,
+                "seasonId": 1,
+                "name": "Mildred Stewart",
+                "entries": 1,
+                "points": 79,
+                "place": 2,
+                "qseasonId": 3
+              },
+              {
+                "id": 444,
+                "playerId": 23,
+                "seasonId": 1,
+                "name": "Stephen Bowman",
+                "entries": 1,
+                "points": 30,
+                "place": 3,
+                "qseasonId": 3
+              },
+              {
+                "id": 445,
+                "playerId": 3,
+                "seasonId": 1,
+                "name": "Annie Burton",
+                "entries": 1,
+                "points": 23,
+                "place": 4,
+                "qseasonId": 3
+              },
+              {
+                "id": 446,
+                "playerId": 19,
+                "seasonId": 1,
+                "name": "Catherine Moore",
+                "entries": 1,
+                "points": 14,
+                "place": 5,
+                "qseasonId": 3
+              },
+              {
+                "id": 447,
+                "playerId": 16,
+                "seasonId": 1,
+                "name": "Brandon Moore",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 448,
+                "playerId": 30000,
+                "seasonId": 1,
+                "name": "Guest Admin",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 449,
+                "playerId": 20000,
+                "seasonId": 1,
+                "name": "Guest User",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 450,
+                "playerId": 7,
+                "seasonId": 1,
+                "name": "Marie Herrera",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 451,
+                "playerId": 12,
+                "seasonId": 1,
+                "name": "Pamela Herrera",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 452,
+                "playerId": 28,
+                "seasonId": 1,
+                "name": "Robert Woods",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 453,
+                "playerId": 21,
+                "seasonId": 1,
+                "name": "Sean Ward",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 454,
+                "playerId": 25,
+                "seasonId": 1,
+                "name": "Theresa Silva",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              },
+              {
+                "id": 455,
+                "playerId": 14,
+                "seasonId": 1,
+                "name": "Todd Sims",
+                "entries": 1,
+                "points": 0,
+                "qseasonId": 3
+              }
+            ],
+            "payouts": [
+              {
+                "id": 88,
+                "seasonId": 1,
+                "place": 1,
+                "amount": 140,
+                "qseasonId": 3
+              },
+              {
+                "id": 89,
+                "seasonId": 1,
+                "place": 2,
+                "amount": 84,
+                "qseasonId": 3
+              },
+              {
+                "id": 90,
+                "seasonId": 1,
+                "place": 3,
+                "amount": 56,
+                "qseasonId": 3
+              }
+            ],
+            "qtocCollected": 280,
+            "qtocPerGameCost": 20
+          },
+          {
+            "id": 4,
+            "seasonId": 1,
+            "start": [
+              2024,
+              2,
+              1
+            ],
+            "ended": [
+              2024,
+              4,
+              30
+            ],
+            "quarter": "FOURTH",
+            "numPayouts": 3,
+            "numGames": 13,
+            "numGamesPlayed": 0,
+            "finalized": false,
+            "players": [],
+            "payouts": [],
+            "qtocCollected": 0,
+            "qtocPerGameCost": 20
+          }
+        ]
+      }
+    }
+  ]
+}

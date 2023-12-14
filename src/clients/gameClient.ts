@@ -1,18 +1,59 @@
-import {delay, getRandomInt} from "../utils/util";
-import gameData from "./game-data";
-import {GameData} from "../game/model/GameData";
+import {server} from "../utils/api";
+import axios, {AxiosError} from "axios";
+import {clearToken, delay, getRandomInt, getToken} from "../utils/util";
+import {GameData, GamePlayerData} from "../game/model/GameDataTypes";
 import {PlayerData} from "../player/model/PlayerData";
-import {GamePlayerData} from "../game/model/GamePlayerData";
+import {NavigateFunction} from "react-router-dom";
 
 const gameClient = {
-  getGame: async (id = 0): Promise<GameData> => {
-    // delay 1 to 3 seconds
-    await delay(getRandomInt(1000, 3000));
-    // One in 10 will error
-    if (getRandomInt(0, 10) === 1) {
-      throw new Error('uh oh could not get game' + Date.now());
+  getGames: async (id: number, navigate: NavigateFunction): Promise<Array<GameData> | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
     }
-    return GameData.fromObj(gameData);
+    try {
+      const result = await server.get(`/api/v4/seasons/${id}/games`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
+  },
+
+  getGame: async (id: number, navigate: NavigateFunction): Promise<GameData | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
+    }
+    try {
+      const result = await server.get(`/api/v4/games/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
   },
 
   addPlayer: async (gameId: number, player: PlayerData): Promise<PlayerData> => {

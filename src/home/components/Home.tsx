@@ -19,6 +19,10 @@ const Home = () => {
       <br/>
       <h1>Welcome to Texas TOC</h1>
       <p>
+        <Link to="/season">
+          <Button variant="outline-secondary"> Season </Button>
+        </Link>
+        &nbsp;
         <Link to="/current-game">
           <Button variant="outline-secondary"> Game </Button>
         </Link>
