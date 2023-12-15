@@ -1,24 +1,33 @@
-import {delay, getRandomInt} from "../utils/util";
-import leaguePlayersData from "./league-players-data";
-import {PlayerData} from "../player/model/PlayerData";
+import {server} from "../utils/api";
+import axios, {AxiosError} from "axios";
+import {clearToken, getToken} from "../utils/util";
+import {NavigateFunction} from "react-router-dom";
+import {LeaguePlayerData} from "../league/model/LeaguePlayerDataTypes";
 
 const playerClient = {
-  getPlayers: async (id = 0): Promise<Array<PlayerData>> => {
-    // delay 1 to 3 seconds
-    await delay(getRandomInt(1000, 3000));
-    // One in four will error
-    if (getRandomInt(0, 4) === 1) {
-      throw new Error('uh oh could not get players' + Date.now());
+  getPlayers: async (navigate: NavigateFunction): Promise<Array<LeaguePlayerData> | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
     }
-
-    const players: Array<PlayerData> = [];
-    leaguePlayersData.forEach(player => {
-      const pd: PlayerData | undefined = PlayerData.fromObj(player);
-      if (pd) {
-        players.push(pd);
+    try {
+      const result = await server.get('/api/v4/players', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
       }
-    });
-    return players;
+      throw error;
+    }
   }
 }
 

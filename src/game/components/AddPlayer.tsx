@@ -3,7 +3,7 @@ import {useContext} from "react";
 import _ from "lodash";
 import {GameContext, GameContextType} from "./Game";
 import useAddPlayer from "../hooks/useAddPlayer";
-import {PlayerData} from "../../player/model/PlayerData";
+import {LeaguePlayerData} from "../../league/model/LeaguePlayerDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {GamePlayerData} from "../model/GameDataTypes";
 
@@ -27,7 +27,7 @@ function AddPlayer() {
   const gamePlayers = game.players;
 
   // TODO should the processing of the players be moved to a context or a util file?
-  const renderPlayers = (leaguePlayers: Array<PlayerData>,
+  const renderPlayers = (leaguePlayers: Array<LeaguePlayerData>,
                          seasonPlayers: Array<SeasonPlayerData>,
                          gamePlayers: Array<GamePlayerData>) => {
     // Sort season players by name
@@ -35,7 +35,7 @@ function AddPlayer() {
 
     // Remove players already in game
     const playersFiltered = _.filter(leaguePlayers,
-      (p: PlayerData) => {
+      (p: LeaguePlayerData) => {
         let index = _.findIndex(gamePlayers, function (gp: GamePlayerData) {
           return gp.playerId === p.id;
         });
@@ -64,7 +64,7 @@ function AddPlayer() {
 
     // Remove players in that are in the season
     const playersFiltered2 = _.filter(playersFiltered,
-      (p: PlayerData) => {
+      (p: LeaguePlayerData) => {
         let index = _.findIndex(seasonPlayersFiltered, function (sp: SeasonPlayerData) {
           return sp.playerId === p.id;
         });

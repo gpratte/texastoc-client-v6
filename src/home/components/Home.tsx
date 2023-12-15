@@ -18,6 +18,7 @@ const Home = () => {
     <div>
       <br/>
       <h1>Welcome to Texas TOC</h1>
+      <p>The stuff you are most interested in...</p>
       <p>
         <Link to="/season">
           <Button variant="outline-secondary"> Season </Button>
@@ -25,6 +26,12 @@ const Home = () => {
         &nbsp;
         <Link to="/current-game">
           <Button variant="outline-secondary"> Game </Button>
+        </Link>
+      </p>
+      <p>The stuff you'll look at from time to time...</p>
+      <p>
+        <Link to="/players">
+          <Button variant="outline-secondary">Players</Button>
         </Link>
       </p>
     </div>
