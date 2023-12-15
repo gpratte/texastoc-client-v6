@@ -1,10 +1,10 @@
-import {LeaguePlayerData} from "../model/LeaguePlayerDataTypes"
-import {LeaguePlayersActionTypes} from "./leaguePlayersActionTypes"
+import {LeaguePlayerData} from "../model/LeagueDataTypes"
+import {LeagueActionTypes} from "./leagueActionTypes"
 
 export type RefreshLeaguePlayersAction = {
   "type": string;
   "leaguePlayers": Array<LeaguePlayerData>;
 }
 export default function refreshLeaguePlayersAction(leaguePlayers: Array<LeaguePlayerData>): RefreshLeaguePlayersAction {
-  return { type: LeaguePlayersActionTypes.REFRESH_LEAGUE_PLAYERS, leaguePlayers}
+  return { type: LeagueActionTypes.REFRESH_LEAGUE_PLAYERS, leaguePlayers}
 }

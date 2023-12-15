@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-07-rounds-points
+Show the league rounds and points.
+
 ### step-06-league-players
 Show the league players. Still have a TODO to edit a league player.
 

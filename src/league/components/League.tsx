@@ -17,6 +17,8 @@ import Loading from "../../common/components/Loading";
 import {NotificationData} from "../model/NotificationDataBuilder";
 import Login from "../../login/components/Login";
 import LeaguePlayers from "./LeaguePlayers";
+import Rounds from "./Rounds";
+import Points from "./Points";
 
 export interface NotificationContextType {
   newNotification(notify: NotificationData): void;
@@ -68,6 +70,8 @@ function League() {
                 <Route path="/current-game" element={<Game />} />
                 <Route path="/season" element={<Season />} />
                 <Route path="/players" element={<LeaguePlayers />} />
+                <Route path="/rounds" element={<Rounds />} />
+                <Route path="/points" element={<Points />} />
               </Routes>
             </Col>
           </Row>

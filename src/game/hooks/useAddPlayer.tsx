@@ -3,8 +3,8 @@ import seasonClient from "../../clients/seasonClient";
 import {GameContext, GameContextType} from "../components/Game";
 import {NotificationContext, NotificationContextType} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
-import playerClient from "../../clients/playerClient";
-import {LeaguePlayerData} from "../../league/model/LeaguePlayerDataTypes";
+import leagueClient from "../../clients/leagueClient";
+import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
@@ -22,7 +22,7 @@ function useAddPlayer() {
   useEffect(() => {
     async function init() {
       try {
-        const leaguePlayers = await playerClient.getPlayers(navigate);
+        const leaguePlayers = await leagueClient.getPlayers(navigate);
         // No need to use a function for the setLeaguePlayers but doing it just to show
         // that the argument is the current state of leaguePlayers.
         setLeaguePlayers((leaguePlayers) => {

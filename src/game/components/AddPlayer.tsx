@@ -3,7 +3,7 @@ import {useContext} from "react";
 import _ from "lodash";
 import {GameContext, GameContextType} from "./Game";
 import useAddPlayer from "../hooks/useAddPlayer";
-import {LeaguePlayerData} from "../../league/model/LeaguePlayerDataTypes";
+import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {GamePlayerData} from "../model/GameDataTypes";
 
