@@ -34,6 +34,16 @@ const Home = () => {
           <Button variant="outline-secondary">Players</Button>
         </Link>
       </p>
+      <p>The stuff you might look at once...</p>
+      <p>
+        <Link to="/rounds">
+          <Button variant="outline-secondary">Rounds</Button>
+        </Link>
+        &nbsp;
+        <Link to="/points">
+          <Button variant="outline-secondary">Points</Button>
+        </Link>
+      </p>
     </div>
   )
 }

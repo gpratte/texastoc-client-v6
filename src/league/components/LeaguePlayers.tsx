@@ -1,5 +1,5 @@
 import React from "react";
-import {LeaguePlayerData} from "../model/LeaguePlayerDataTypes";
+import {LeaguePlayerData} from "../model/LeagueDataTypes";
 import {obfuscateEmail, obfuscatePhone} from "../../utils/util";
 import Table from "react-bootstrap/Table";
 import useLeaguePlayers from "../hooks/useLeaguePlayers";

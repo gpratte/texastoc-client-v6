@@ -2,7 +2,7 @@ import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
 import {clearToken, delay, getRandomInt, getToken} from "../utils/util";
 import {GameData, GamePlayerData} from "../game/model/GameDataTypes";
-import {LeaguePlayerData} from "../league/model/LeaguePlayerDataTypes";
+import {LeaguePlayerData} from "../league/model/LeagueDataTypes";
 import {NavigateFunction} from "react-router-dom";
 
 const gameClient = {
