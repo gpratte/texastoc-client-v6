@@ -4,14 +4,14 @@ import {GameContext, GameContextType} from "../components/Game";
 import {NotificationContext, NotificationContextType} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
 import playerClient from "../../clients/playerClient";
-import {PlayerData} from "../../player/model/PlayerData";
+import {LeaguePlayerData} from "../../league/model/LeaguePlayerDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
 
 function useAddPlayer() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [leaguePlayers, setLeaguePlayers] = useState<Array<PlayerData>>([])
+  const [leaguePlayers, setLeaguePlayers] = useState<Array<LeaguePlayerData>>([])
   const [seasonPlayers, setSeasonPlayers] = useState<Array<SeasonPlayerData>>([])
   const [activeTabKey, setActiveTabKey] = useState<string>('league-player');
 
@@ -22,10 +22,10 @@ function useAddPlayer() {
   useEffect(() => {
     async function init() {
       try {
-        const leaguePlayers = await playerClient.getPlayers(game.id);
+        const leaguePlayers = await playerClient.getPlayers(navigate);
         // No need to use a function for the setLeaguePlayers but doing it just to show
         // that the argument is the current state of leaguePlayers.
-        setLeaguePlayers((currentLeaguePlayers) => {
+        setLeaguePlayers((leaguePlayers) => {
           // console.log('using a FUNCTION for the set league players, argument is ' +
           //   JSON.stringify(currentLeaguePlayers))
           return leaguePlayers
@@ -64,8 +64,10 @@ function useAddPlayer() {
       setShowAddPlayer(false);
       try {
         const id = Number.parseInt(e.target.elements.playerId.value);
-        const playerData: PlayerData | undefined = PlayerData.fromObj({id});
-        if (playerData !== undefined) {
+        // TODO
+        const playerData : LeaguePlayerData | null = null;
+        //const playerData: PlayerData | undefined = PlayerData.fromObj({id});
+        if (playerData !== null) {
           await gameClient.addPlayer(game.id, playerData);
         }
         // await gameClient.addPlayer(game.id, {
@@ -88,7 +90,9 @@ function useAddPlayer() {
       setShowAddPlayer(false);
       try {
         const id = Number.parseInt(e.target.elements.id.value)
-        const playerData: PlayerData | undefined = PlayerData.fromObj({id});
+        // TODO
+        const playerData : LeaguePlayerData | null = null;
+        //const playerData: PlayerData | undefined = PlayerData.fromObj({id});
         if (playerData) {
           await gameClient.addPlayer(game.id, playerData);
         }

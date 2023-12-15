@@ -4,7 +4,7 @@ import {Badge, Button, Nav, NavDropdown} from "react-bootstrap";
 import React from "react";
 import {NotificationData} from "../model/NotificationDataBuilder";
 import {logout} from "../../login/loginClient";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Navigation(props: {notifications: Array<NotificationData>, showNotifications: () => void}) {
 
@@ -18,9 +18,9 @@ function Navigation(props: {notifications: Array<NotificationData>, showNotifica
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home" className="text">
-          {/*<Link to="/home">*/}
+          <Link to="/home">
             <i className="nav-home fa-solid fa-house"></i>
-          {/*</Link>*/}
+          </Link>
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav>

@@ -35,3 +35,18 @@ export function shouldRedirect() {
   }
   return '';
 }
+
+export function obfuscatePhone(phone : string | undefined | null) {
+  return phone && phone.length > 4 ? '*' + phone.substring(phone.length - 4) : '';
+}
+
+export function obfuscateEmail(email : string | undefined | null) {
+  let obfuscatedEmail = '';
+  if (email && email.indexOf('@') !== -1) {
+    obfuscatedEmail = email.substring(0,1);
+    obfuscatedEmail += '*';
+    const indexOfAt = email.indexOf('@')
+    obfuscatedEmail += email.substring(indexOfAt);
+  }
+  return obfuscatedEmail;
+}

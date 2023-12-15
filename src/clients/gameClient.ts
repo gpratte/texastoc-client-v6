@@ -2,7 +2,7 @@ import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
 import {clearToken, delay, getRandomInt, getToken} from "../utils/util";
 import {GameData, GamePlayerData} from "../game/model/GameDataTypes";
-import {PlayerData} from "../player/model/PlayerData";
+import {LeaguePlayerData} from "../league/model/LeaguePlayerDataTypes";
 import {NavigateFunction} from "react-router-dom";
 
 const gameClient = {
@@ -56,7 +56,7 @@ const gameClient = {
     }
   },
 
-  addPlayer: async (gameId: number, player: PlayerData): Promise<PlayerData> => {
+  addPlayer: async (gameId: number, player: LeaguePlayerData): Promise<LeaguePlayerData> => {
     // delay 1 to 3 seconds
     await delay(getRandomInt(1000, 3000));
     // One in four will error
