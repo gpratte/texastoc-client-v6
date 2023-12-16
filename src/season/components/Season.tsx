@@ -14,11 +14,12 @@ import {convertDateToMoment} from "../../utils/util";
 
 // @ts-ignore
 function Season(props) {
+  const seasonId : number = props.seasonId;
   const season: SeasonData | undefined = props.season;
 
   const {
     isLoading
-  } = useSeason(season?.id || 0);
+  } = useSeason(seasonId);
 
   if (_.isEmpty(season)) {
     return (

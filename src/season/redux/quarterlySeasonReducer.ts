@@ -3,7 +3,6 @@ import {RefreshQuarterlySeasonAction} from "./refreshQuarterlySeasonAction";
 import {QuarterlySeasonActionTypes} from "./quarterlySeasonActionTypes";
 
 export default function quarterlySeasonReducer(state: Array<QuarterlySeasonData> | [] = [], action: RefreshQuarterlySeasonAction): Array<QuarterlySeasonData> | [] {
-  // TODO don't need a switch stmt yet
   switch (action.type) {
     case QuarterlySeasonActionTypes.REFRESH_QUARTERLY_SEASONS:
       return action.quarterlies;

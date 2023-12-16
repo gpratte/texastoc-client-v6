@@ -18,8 +18,9 @@ export interface GameContextType {
 
 export const GameContext = createContext<GameContextType | null>(null);
 
-function Game(props:{game:GameData}) {
-
+// @ts-ignore
+function Game(props) {
+  const seasonId : number = props.seasonId;
   const game: GameData = props.game;
 
   const {

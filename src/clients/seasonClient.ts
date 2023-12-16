@@ -2,13 +2,10 @@ import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
 import {SeasonData} from "../season/model/SeasonDataTypes";
 import {getToken, clearToken} from '../utils/util';
-import {NotificationData} from "../league/model/NotificationDataBuilder";
 import {NavigateFunction} from "react-router-dom";
 
 const seasonClient = {
-  // TODO remove the first parameter
-  getCurrentSeasonId: async (newNotification: (n: NotificationData) => void, navigate: NavigateFunction): Promise<number> => {
-    // TODO what to do if there is no token?
+  getCurrentSeasonId: async (navigate: NavigateFunction): Promise<number> => {
     const token = getToken();
     if (!token) {
       navigate("/login");
@@ -36,10 +33,7 @@ const seasonClient = {
       throw error;
     }
   },
-  getSeason: async (id: number,
-                    newNotification: (n: NotificationData) => void,
-                    navigate: NavigateFunction): Promise<SeasonData | null> => {
-    // TODO what to do if there is no token?
+  getSeason: async (id: number, navigate: NavigateFunction): Promise<SeasonData | null> => {
     const token = getToken();
     if (!token) {
       navigate("/login");

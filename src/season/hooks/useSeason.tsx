@@ -3,7 +3,7 @@ import {NotificationDataBuilder, NotificationType} from "../../league/model/Noti
 import {NotificationContext, NotificationContextType} from "../../league/components/League";
 import seasonClient from "../../clients/seasonClient";
 import leagueStore from "../../league/redux/leagueStore";
-import refreshSeasonAction from "../redux/refreshSeasonAction";
+import {refreshSeasonAction, setSeasonId} from "../redux/seasonActions";
 import {useNavigate} from "react-router-dom";
 
 function useSeason(seasonId: number) {
@@ -17,7 +17,8 @@ function useSeason(seasonId: number) {
         setIsLoading(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
-          currentSeasonId = await seasonClient.getCurrentSeasonId(newNotification, navigate);
+          currentSeasonId = await seasonClient.getCurrentSeasonId(navigate);
+          leagueStore.dispatch(setSeasonId(currentSeasonId));
           if (currentSeasonId === 0) {
             newNotification(new NotificationDataBuilder()
               .withMessage("Problem getting season")
@@ -27,7 +28,7 @@ function useSeason(seasonId: number) {
         }
 
         if (currentSeasonId !== 0) {
-          const season = await seasonClient.getSeason(currentSeasonId, newNotification, navigate);
+          const season = await seasonClient.getSeason(currentSeasonId, navigate);
           if (season) {
             leagueStore.dispatch(refreshSeasonAction(season));
           } else {

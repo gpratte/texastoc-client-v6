@@ -4,8 +4,7 @@ import {NotificationContext, NotificationContextType} from "../components/League
 import leagueStore from "../../league/redux/leagueStore";
 import {useNavigate} from "react-router-dom";
 import leagueClient from "../../clients/leagueClient";
-import {LeaguePlayerData, Round} from "../model/LeagueDataTypes";
-import refreshLeaguePlayersAction from "../redux/refreshLeaguePlayersAction";
+import {Round} from "../model/LeagueDataTypes";
 import refreshRoundsAction from "../redux/refreshRoundsAction";
 
 export default function useRounds() {
