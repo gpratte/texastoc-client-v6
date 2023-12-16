@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import QuarterlySeasonStandings from "./QuarterlySeasonStandings";
 import Payouts from "../Payouts";
 import {QuarterlySeasonData} from "../../model/QuarterlySeasonDataTypes";
-import {convertDateToMoment} from "../../../utils/util";
+import {convertDateToString} from "../../../utils/util";
 
 // @ts-ignore
 function QuarterlySeason(props) {
@@ -11,8 +11,8 @@ function QuarterlySeason(props) {
   const quarter : QuarterlySeasonData = props.quarter;
   const {start, ended, numGamesPlayed, qtocCollected, players, payouts} = quarter;
 
-  const startDate = convertDateToMoment(start);
-  const endedDate = convertDateToMoment(ended);
+  const startDate = convertDateToString(start);
+  const endedDate = convertDateToString(ended);
 
   return (
     <>

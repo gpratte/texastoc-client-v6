@@ -109,7 +109,7 @@ function useAddPlayer() {
           .build());
       }
     }
-    refreshGame();
+    refreshGame(game.id);
   }
 
 

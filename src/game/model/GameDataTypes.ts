@@ -1,6 +1,7 @@
 export type GamePlayerData = {
   id: number;
   playerId: number;
+  gameId: number;
   name: string;
   boughtIn: boolean;
   rebought: boolean;

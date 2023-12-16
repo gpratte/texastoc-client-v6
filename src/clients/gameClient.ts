@@ -6,14 +6,14 @@ import {LeaguePlayerData} from "../league/model/LeagueDataTypes";
 import {NavigateFunction} from "react-router-dom";
 
 const gameClient = {
-  getGames: async (id: number, navigate: NavigateFunction): Promise<Array<GameData> | null> => {
+  getGames: async (seasonId: number, navigate: NavigateFunction): Promise<Array<GameData> | null> => {
     const token = getToken();
     if (!token) {
       navigate("/login");
       return null;
     }
     try {
-      const result = await server.get(`/api/v4/seasons/${id}/games`, {
+      const result = await server.get(`/api/v4/seasons/${seasonId}/games`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
