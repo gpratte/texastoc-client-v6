@@ -20,6 +20,11 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+###  step-09-determine-current-game
+Determine the current game for the season. Since there can only be one game 
+for a season that is not finalized then that is the current game. If no
+game is unfinalized the use the game with the most recent date.
+
 ### step-08-top-level-set-seasonId
 Set the season Id on top level league component.
 
