@@ -40,7 +40,7 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
         .withMessage("Problem deleting player")
         .build());
     }
-    refreshGame();
+    refreshGame(game.id);
   }
 
   const updateGamePlayer = async (gamePlayer: GamePlayerData) => {
@@ -52,7 +52,7 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
         .withMessage("Problem updating player")
         .build());
     }
-    refreshGame();
+    refreshGame(gamePlayer.gameId);
   }
 
   return {

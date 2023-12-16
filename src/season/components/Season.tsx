@@ -10,7 +10,7 @@ import SeasonStandings from "./SeasonStandings";
 import Quarters from "./quarters/Quarters";
 import useSeason from "../hooks/useSeason";
 import Games from "./games/Games";
-import {convertDateToMoment} from "../../utils/util";
+import {convertDateToString} from "../../utils/util";
 
 // @ts-ignore
 function Season(props) {
@@ -34,8 +34,8 @@ function Season(props) {
     )
   }
 
-  const startDate = convertDateToMoment(season.start);
-  const endedDate = convertDateToMoment(season.ended);
+  const startDate = convertDateToString(season.start);
+  const endedDate = convertDateToString(season.ended);
 
   return (
     <>

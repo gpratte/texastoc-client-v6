@@ -1,6 +1,6 @@
 import React from "react";
 import {GameData} from "../../../game/model/GameDataTypes";
-import {convertDateToMoment} from "../../../utils/util";
+import {convertDateToString} from "../../../utils/util";
 import Table from "react-bootstrap/Table";
 import GameStandings from "./GameStandings";
 import Payouts from "../Payouts";
@@ -11,7 +11,7 @@ function Game(props) {
   const game : GameData = props.game;
   const {date, hostName, seasonGameNum, quarterlyGameNum, totalCollected, annualTocCollected, annualTocFromRebuyAddOnCalculated, payouts, players, prizePotCalculated, quarterlyTocCollected, kittyCalculated} = game;
   const annualToc = annualTocCollected + annualTocFromRebuyAddOnCalculated;
-  const gameDate = convertDateToMoment(date);
+  const gameDate = convertDateToString(date);
 
   return (
     <>

@@ -11,7 +11,7 @@ import _ from "lodash";
 
 export interface GameContextType {
   game: GameData;
-  refreshGame: () => void;
+  refreshGame : (n : number) => void;
   showAddPlayer: boolean;
   setShowAddPlayer: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -28,7 +28,7 @@ function Game(props) {
     isLoading,
     showAddPlayer,
     setShowAddPlayer
-  } = useGame(game.id);
+  } = useGame(seasonId, game.id || 0);
 
   const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(true)
 

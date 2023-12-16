@@ -4,7 +4,7 @@ import {GameData} from "../../../game/model/GameDataTypes";
 import useGames from "../../hooks/useGames";
 import _ from "lodash";
 import {Accordion, Button} from "react-bootstrap";
-import {convertDateToMoment} from "../../../utils/util";
+import {convertDateToString} from "../../../utils/util";
 import Game from "./Game";
 
 // @ts-ignore
@@ -36,7 +36,7 @@ function Games(props) {
         <Accordion>
           <Accordion.Item eventKey={game.id.toString()}>
             <Accordion.Header>
-              {convertDateToMoment(game.date)}
+              {convertDateToString(game.date)}
               {
                 game.finalized &&
                 <Button variant="link" onClick={() => unlock(game.id)}>
