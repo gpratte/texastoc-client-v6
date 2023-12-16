@@ -7,7 +7,6 @@ import {NotificationContextType} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import refreshGameAction from "../redux/refreshGameAction";
 import {useNavigate} from "react-router-dom";
-import refreshGamesAction from "../../season/redux/refreshGamesAction";
 
 function useGame(id : number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);

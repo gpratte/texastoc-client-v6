@@ -19,6 +19,8 @@ import Login from "../../login/components/Login";
 import LeaguePlayers from "./LeaguePlayers";
 import Rounds from "./Rounds";
 import Points from "./Points";
+import {connect} from "react-redux";
+import useLeague from "../hooks/useLeague";
 
 export interface NotificationContextType {
   newNotification(notify: NotificationData): void;
@@ -27,7 +29,11 @@ export interface NotificationContextType {
 }
 export const NotificationContext = createContext<NotificationContextType | null>(null);
 
-function League() {
+// @ts-ignore
+function League(props) {
+
+  const seasonId : number = props.seasonId;
+
   const {
     newNotification,
     toggleLoadingGlobal,
@@ -41,6 +47,10 @@ function League() {
     hideNotificationsPanel,
     isGlobalLoading
   } = useNotifications(30000);
+
+  const {
+    isLoading
+  } = useLeague(seasonId, newNotification);
 
   return (
     <NotificationContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal}}>
@@ -67,8 +77,8 @@ function League() {
                 <Route path="*" element={<Home />} />
                 <Route path="/home/*" element={<Home />} />
                 <Route path='/login' element={<Login />} />
-                <Route path="/current-game" element={<Game />} />
-                <Route path="/season" element={<Season />} />
+                <Route path="/current-game" element={<Game seasonId={seasonId}/>} />
+                <Route path="/season" element={<Season seasonId={seasonId}/>} />
                 <Route path="/players" element={<LeaguePlayers />} />
                 <Route path="/rounds" element={<Rounds />} />
                 <Route path="/points" element={<Points />} />
@@ -86,4 +96,11 @@ function League() {
   )
 }
 
-export default League;
+// @ts-ignore
+function mapStateToProps(state) {
+  return {
+    seasonId: state.seasonId,
+  };
+}
+
+export default connect(mapStateToProps)(League);

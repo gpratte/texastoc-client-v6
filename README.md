@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-08-top-level-set-seasonId
+Set the season Id on top level league component.
+
 ### step-07-rounds-points
 Show the league rounds and points.
 

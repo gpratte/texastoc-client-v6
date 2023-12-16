@@ -37,7 +37,7 @@ function useAddPlayer() {
           .build());
       }
       try {
-        const season = await seasonClient.getSeason(game.seasonId, newNotification, navigate);
+        const season = await seasonClient.getSeason(game.seasonId, navigate);
         if (season && season.players) {
           setSeasonPlayers(season.players);
         }
