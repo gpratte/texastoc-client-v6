@@ -20,6 +20,10 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-10-common-initialize-season-id
+The league, season and game components need the season Id to be initialized.
+Moved the initialize code to a common function.
+
 ###  step-09-determine-current-game
 Determine the current game for the season. Since there can only be one game 
 for a season that is not finalized then that is the current game. If no
