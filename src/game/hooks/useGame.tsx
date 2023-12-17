@@ -8,6 +8,7 @@ import leagueStore from "../../league/redux/leagueStore";
 import refreshGameAction from "../redux/refreshGameAction";
 import {useNavigate} from "react-router-dom";
 import {convertDateToMoment, convertDateToString} from "../../utils/util";
+import {getSeason} from "../../season/seasonUtils";
 
 function useGame(seasonId: number, gameId : number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -21,15 +22,18 @@ function useGame(seasonId: number, gameId : number) {
     async function init() {
       try {
         setIsLoading(true);
+        let currentSeasonId = seasonId;
+        if (currentSeasonId === 0) {
+          currentSeasonId = await getSeason(navigate, newNotification);
+        }
         let currentGameId = gameId;
-        if (currentGameId === 0) {
-          const games : Array<GameData> | null = await gameClient.getGames(seasonId, navigate);
+        if (currentSeasonId !== 0 && currentGameId === 0) {
+          const games : Array<GameData> | null = await gameClient.getGames(currentSeasonId, navigate);
           if (games === null) {
             return;
           }
           // Use the first unfinalized game (only one should be unfinalized)
           const unfinalizedGame = games.find(g => {
-            console.log(g.finalized);
             return !g.finalized;
           });
           if (unfinalizedGame) {
