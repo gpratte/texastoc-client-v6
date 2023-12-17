@@ -5,6 +5,7 @@ import seasonClient from "../../clients/seasonClient";
 import leagueStore from "../../league/redux/leagueStore";
 import {refreshSeasonAction, setSeasonId} from "../redux/seasonActions";
 import {useNavigate} from "react-router-dom";
+import {getSeason} from "../seasonUtils";
 
 function useSeason(seasonId: number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -17,14 +18,7 @@ function useSeason(seasonId: number) {
         setIsLoading(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
-          currentSeasonId = await seasonClient.getCurrentSeasonId(navigate);
-          leagueStore.dispatch(setSeasonId(currentSeasonId));
-          if (currentSeasonId === 0) {
-            newNotification(new NotificationDataBuilder()
-              .withMessage("Problem getting season")
-              .withType(NotificationType.ERROR)
-              .build());
-          }
+          currentSeasonId = await getSeason(navigate, newNotification);
         }
 
         if (currentSeasonId !== 0) {
