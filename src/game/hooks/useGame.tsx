@@ -13,12 +13,9 @@ import {getSeason} from "../../season/seasonUtils";
 function useGame(seasonId: number, gameId : number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const {newNotification} = useContext(NotificationContext) as NotificationContextType;
-  const [showAddPlayer, setShowAddPlayer] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('useGame.useEffect entered')
-
     async function init() {
       try {
         setIsLoading(true);
@@ -103,9 +100,7 @@ function useGame(seasonId: number, gameId : number) {
 
   return {
     refreshGame,
-    isLoading,
-    showAddPlayer,
-    setShowAddPlayer
+    isLoading
   };
 }
 

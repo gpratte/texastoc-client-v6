@@ -1,8 +1,12 @@
 import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
 import {clearToken, delay, getRandomInt, getToken} from "../utils/util";
-import {GameData, GamePlayerData} from "../game/model/GameDataTypes";
-import {LeaguePlayerData} from "../league/model/LeagueDataTypes";
+import {
+  AddExistingPlayerData,
+  AddNewPlayerData,
+  GameData,
+  GamePlayerData
+} from "../game/model/GameDataTypes";
 import {NavigateFunction} from "react-router-dom";
 
 const gameClient = {
@@ -55,17 +59,60 @@ const gameClient = {
       throw error;
     }
   },
-
-  addPlayer: async (gameId: number, player: LeaguePlayerData): Promise<LeaguePlayerData> => {
-    // delay 1 to 3 seconds
-    await delay(getRandomInt(1000, 3000));
-    // One in four will error
-    if (getRandomInt(0, 4) === 1) {
-      throw new Error('uh oh could not add player');
+  addExistingPlayer: async (gameId: number, player: AddExistingPlayerData, navigate: NavigateFunction): Promise<GamePlayerData | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
     }
-    return {...player};
+    try {
+      const result = await server.post(`/api/v4/games/${gameId}/players`,
+        player,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
   },
-
+  addNewPlayer: async (gameId: number, player: AddNewPlayerData, navigate: NavigateFunction): Promise<GamePlayerData | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
+    }
+    try {
+      const result = await server.post(`/api/v4/games/${gameId}/players`,
+        player,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/vnd.texastoc.first-time+json'
+          }
+        });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
+  },
   updatePlayer: async (gamePlayer: GamePlayerData): Promise<GamePlayerData> => {
     // delay 1 to 3 seconds
     await delay(getRandomInt(1000, 3000));

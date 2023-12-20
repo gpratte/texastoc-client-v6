@@ -4,12 +4,19 @@ import {useContext} from "react";
 import {GameContext, GameContextType} from "./Game";
 import EditPlayer from "./EditPlayer";
 import {GamePlayerData} from "../model/GameDataTypes";
+import useGamePlayers from "../hooks/useGamePlayers";
 
 function GamePlayers() {
 
-  const {game, setShowAddPlayer} = useContext(GameContext) as GameContextType;
+  const {game} = useContext(GameContext) as GameContextType;
+
+  const {
+    showAddPlayer,
+    setShowAddPlayer
+  }: { setShowAddPlayer: (value: (((prevState: boolean) => boolean) | boolean)) => void; showAddPlayer: boolean } = useGamePlayers();
 
   const gamePlayers = game.players;
+  // TODO chop
   //const isChop = this.isThereChop(gamePlayers);
   const isChop = false;
   const numPaidPlayers = game.numPaidPlayers;
@@ -90,7 +97,7 @@ function GamePlayers() {
         </tbody>
       </Table>
 
-      <AddPlayer/>
+      <AddPlayer types={ {showAddPlayer, setShowAddPlayer} } />
 
       <div>
         <Button variant="primary" onClick={() => setShowAddPlayer(true)}>

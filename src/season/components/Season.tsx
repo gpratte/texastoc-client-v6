@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import './season.css';
 import {connect} from "react-redux";
 import _ from "lodash";
@@ -16,6 +16,7 @@ import {convertDateToString} from "../../utils/util";
 function Season(props) {
   const seasonId : number = props.seasonId;
   const season: SeasonData | undefined = props.season;
+  const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(false)
 
   const {
     isLoading
@@ -42,7 +43,10 @@ function Season(props) {
       <h3>{'' + startDate + ' - '  + endedDate}</h3>
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Details</Accordion.Header>
+          <Accordion.Button onClick={() => setDetailsAccordionOpen(!detailsAccordionOpen)}>
+            Details {detailsAccordionOpen && <i className="fa-solid fa-chevron-up"></i>}{!detailsAccordionOpen &&
+            <i className="fa-solid fa-chevron-down"></i>}
+          </Accordion.Button>
           <Accordion.Body>
             <SeasonDetails season={season}/>
           </Accordion.Body>

@@ -1,9 +1,27 @@
 import moment from 'moment-timezone'
 import {Table} from "react-bootstrap";
 import {GameData, GamePayout} from "../model/GameDataTypes";
+import {useContext} from "react";
+import {GameContext, GameContextType} from "./Game";
 
+function Details() {
 
-function Details(props: {game: GameData}) {
+  const {game} = useContext(GameContext) as GameContextType;
+  let {
+    date, hostName, totalCollected, totalCombinedTocCalculated,
+    kittyCalculated, prizePotCalculated, payouts
+  } = game;
+
+  const gameDate = date ? moment(date).tz('America/Chicago').format('MM/DD') : 'Unknown'
+  hostName = hostName ? hostName : 'Unknown';
+  let tocPlusKitty = 0;
+  if (totalCombinedTocCalculated || kittyCalculated) {
+    tocPlusKitty = totalCombinedTocCalculated + kittyCalculated;
+  }
+  totalCollected = totalCollected ? totalCollected : 0;
+  prizePotCalculated = prizePotCalculated ? prizePotCalculated : 0;
+  payouts = payouts ? payouts : [];
+
   const renderPayouts = (payouts: Array<GamePayout>) => {
     if (!payouts) {
       return;
@@ -27,21 +45,6 @@ function Details(props: {game: GameData}) {
       )
     })
   }
-
-  let {
-    date, hostName, totalCollected, totalCombinedTocCalculated,
-    kittyCalculated, prizePotCalculated, payouts
-  } = props.game;
-
-  const gameDate = date ? moment(date).tz('America/Chicago').format('MM/DD') : 'Unknown'
-  hostName = hostName ? hostName : 'Unknown';
-  let tocPlusKitty = 0;
-  if (totalCombinedTocCalculated || kittyCalculated) {
-    tocPlusKitty = totalCombinedTocCalculated + kittyCalculated;
-  }
-  totalCollected = totalCollected ? totalCollected : 0;
-  prizePotCalculated = prizePotCalculated ? prizePotCalculated : 0;
-  payouts = payouts ? payouts : [];
 
   return (
     <div>

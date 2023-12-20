@@ -7,24 +7,28 @@ import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {GamePlayerData} from "../model/GameDataTypes";
 
-function AddPlayer() {
+// @ts-ignore
+function AddPlayer(props) {
 
-  // TODO the showAddPlayer is being passed as props so remove from the context
+  const type: { setShowAddPlayer: (value: (((prevState: boolean) => boolean) | boolean)) => void; showAddPlayer: boolean } = props.types;
+  const showAddPlayer = type.showAddPlayer;
+  const setShowAddPlayer = type.setShowAddPlayer;
+
   const {
     game,
-    showAddPlayer,
-    setShowAddPlayer
+    refreshGame
   } = useContext(GameContext) as GameContextType;
+  const gamePlayers = game.players;
 
   const {
+    activeTabKey,
     addGamePlayer,
+    isLoading,
     leaguePlayers,
     seasonPlayers,
-    activeTabKey,
-    setActiveTabKey,
-    isLoading
-  } = useAddPlayer();
-  const gamePlayers = game.players;
+    setActiveTabKey
+  } = useAddPlayer(game.seasonId, game.id, setShowAddPlayer, refreshGame);
+
 
   // TODO should the processing of the players be moved to a context or a util file?
   const renderPlayers = (leaguePlayers: Array<LeaguePlayerData>,

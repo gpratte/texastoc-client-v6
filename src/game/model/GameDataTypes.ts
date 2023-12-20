@@ -1,3 +1,19 @@
+export type AddExistingPlayerData = {
+  playerId: number;
+  gameId: number;
+  boughtIn?: boolean;
+  annualTocParticipant?: boolean;
+  quarterlyTocParticipant?: boolean;
+}
+export type AddNewPlayerData = {
+  gameId: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  boughtIn?: boolean;
+  annualTocParticipant?: boolean;
+  quarterlyTocParticipant?: boolean;
+}
 export type GamePlayerData = {
   id: number;
   playerId: number;
