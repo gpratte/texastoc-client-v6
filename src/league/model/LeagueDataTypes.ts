@@ -9,8 +9,8 @@ export type LeaguePlayerData = {
   lastName? : string;
   phone? : string;
   email? : string;
-  roles: Array<Role>;
-  name : string;
+  roles?: Array<Role>;
+  name? : string;
 }
 
 export type Round = {

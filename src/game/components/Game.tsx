@@ -1,19 +1,17 @@
+import '../../common/style/common.css'
+import _ from "lodash";
 import React, {createContext, useState} from "react";
 import { connect } from "react-redux";
-import Details from "./Details";
-import useGame from "../hooks/useGame";
-import '../../common/style/common.css'
 import {Accordion} from "react-bootstrap";
-import GamePlayers from "./GamePlayers";
 import Loading from "../../common/components/Loading";
 import {GameData} from "../model/GameDataTypes";
-import _ from "lodash";
+import useGame from "../hooks/useGame";
+import Details from "./Details";
+import GamePlayers from "./GamePlayers";
 
 export interface GameContextType {
   game: GameData;
   refreshGame : (n : number) => void;
-  showAddPlayer: boolean;
-  setShowAddPlayer: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const GameContext = createContext<GameContextType | null>(null);
@@ -24,30 +22,28 @@ function Game(props) {
   const game: GameData = props.game;
 
   const {
-    refreshGame,
     isLoading,
-    showAddPlayer,
-    setShowAddPlayer
+    refreshGame
   } = useGame(seasonId, game.id || 0);
 
-  const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(true)
+  const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(false)
 
   if (_.isEmpty(game)) {
     return <h1>No Game</h1>
   }
 
   return (
-    <GameContext.Provider value={{game, refreshGame, showAddPlayer, setShowAddPlayer}}>
+    <GameContext.Provider value={{game, refreshGame}}>
       <Loading isLoading={isLoading}/>
       <div>
-        <Accordion defaultActiveKey="0" flush>
+        <Accordion flush>
           <Accordion.Item eventKey="0">
             <Accordion.Button onClick={() => setDetailsAccordionOpen(!detailsAccordionOpen)}>
               Details {detailsAccordionOpen && <i className="fa-solid fa-chevron-up"></i>}{!detailsAccordionOpen &&
               <i className="fa-solid fa-chevron-down"></i>}
             </Accordion.Button>
             <Accordion.Body>
-              <Details game={game}/>
+              <Details />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

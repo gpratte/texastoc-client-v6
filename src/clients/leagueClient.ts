@@ -29,6 +29,30 @@ const leagueClient = {
       throw error;
     }
   },
+  getPlayer: async (id: number, navigate: NavigateFunction): Promise<LeaguePlayerData | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
+    }
+    try {
+      const result = await server.get(`/api/v4/players/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
+  },
   getRounds: async (navigate: NavigateFunction): Promise<Array<Round> | null> => {
     const token = getToken();
     if (!token) {

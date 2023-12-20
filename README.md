@@ -20,6 +20,10 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-11-get-game-add-player
+Figure out what is the current game of the current season and show it. 
+Also allow a player to be added to the game.
+
 ### step-10-common-initialize-season-id
 The league, season and game components need the season Id to be initialized.
 Moved the initialize code to a common function.
