@@ -4,11 +4,13 @@ import {NotificationContext, NotificationContextType} from "../../league/compone
 import gameClient from "../../clients/gameClient";
 import {GamePlayerData} from "../model/GameDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
+import {useNavigate} from "react-router-dom";
 
 function useEditPlayer(gamePlayer: GamePlayerData) {
 
   const {game, refreshGame} = useContext(GameContext) as GameContextType;
   const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const navigate = useNavigate();
 
   const [accordionOpen, setAccordionOpen] = useState(false);
   const [accordionBodyKey, setAccordionBodyKey] = useState(Math.random());
@@ -21,14 +23,8 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
   const [place, setPlace] = useState(gamePlayer.place);
   const [chop, setChop] = useState(gamePlayer.chop);
 
-  const resetToOriginalState = (gamePlayer: GamePlayerData) => {
-    setBuyInChecked(gamePlayer.boughtIn);
-    setRebuyChecked(gamePlayer.rebought);
-    setAnnualTocChecked(gamePlayer.annualTocParticipant);
-    setQTocChecked(gamePlayer.quarterlyTocParticipant);
-    setAlertChecked(gamePlayer.roundUpdates);
-    setPlace(gamePlayer.place);
-    setChop(gamePlayer.chop);
+  const resetGamePlayer = () => {
+    refreshGame(gamePlayer.gameId);
   }
 
   const deleteGamePlayer = async (gamePlayerId: number) => {
@@ -43,16 +39,32 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
     refreshGame(game.id);
   }
 
-  const updateGamePlayer = async (gamePlayer: GamePlayerData) => {
+  const updateGamePlayer = async (e: any) => {
     try {
-      await gameClient.updatePlayer(gamePlayer);
+      e.preventDefault();
+      const updatedPlayer = {
+        ...gamePlayer,
+        boughtIn: e.target.elements.buyInId.checked,
+        annualTocParticipant: e.target.elements.tocId.checked,
+        quarterlyTocParticipant: e.target.elements.qtocId.checked,
+        rebought: e.target.elements.rebuyId.checked,
+        clockAlert: e.target.elements.clockAlertId.checked
+      }
+      if (e.target.elements.placeId.value) {
+        updatedPlayer.place = parseInt('' + e.target.elements.placeId.value);
+      }
+      if (e.target.elements.chopId.value) {
+        updatedPlayer.chop = parseInt('' + e.target.elements.chopId.value);
+      }
+
+      await gameClient.updatePlayer(updatedPlayer.gameId, updatedPlayer, navigate);
+      await refreshGame(gamePlayer.gameId);
     } catch (error) {
       newNotification(new NotificationDataBuilder()
         .withObj(error)
         .withMessage("Problem updating player")
         .build());
     }
-    refreshGame(gamePlayer.gameId);
   }
 
   return {
@@ -67,7 +79,7 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
     chop, setChop,
     deleteGamePlayer,
     updateGamePlayer,
-    resetToOriginalState
+    resetGamePlayer
   };
 }
 

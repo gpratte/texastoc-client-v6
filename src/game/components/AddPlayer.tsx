@@ -1,18 +1,17 @@
-import {Button, Form, Modal, Spinner, Tab, Tabs} from "react-bootstrap";
 import {useContext} from "react";
 import _ from "lodash";
-import {GameContext, GameContextType} from "./Game";
-import useAddPlayer from "../hooks/useAddPlayer";
+import {Button, Form, Modal, Spinner, Tab, Tabs} from "react-bootstrap";
 import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
+import useAddPlayer from "../hooks/useAddPlayer";
 import {GamePlayerData} from "../model/GameDataTypes";
+import {GameContext, GameContextType} from "./Game";
 
 // @ts-ignore
 function AddPlayer(props) {
 
-  const type: { setShowAddPlayer: (value: (((prevState: boolean) => boolean) | boolean)) => void; showAddPlayer: boolean } = props.types;
-  const showAddPlayer = type.showAddPlayer;
-  const setShowAddPlayer = type.setShowAddPlayer;
+  const showAddPlayer: boolean = props.showAddPlayer;
+  const setShowAddPlayer: (value: (((prevState: boolean) => boolean) | boolean)) => void = props.setShowAddPlayer;
 
   const {
     game,

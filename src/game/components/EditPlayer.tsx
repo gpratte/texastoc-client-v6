@@ -1,15 +1,15 @@
-import {Accordion, Button, Form} from "react-bootstrap";
-import _ from "lodash";
 import '../../common/style/common.css'
+import _ from "lodash";
+import {useRef} from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {useRef} from "react";
+import {Accordion, Button, Form} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import useEditPlayer from "../hooks/useEditPlayer";
 import ErrorBoundary from "../../common/components/ErrorBoundry";
+import useEditPlayer from "../hooks/useEditPlayer";
 import {GamePlayerData} from "../model/GameDataTypes";
-function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>}) {
 
+function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>}) {
   const accordionRef = useRef(null);
   const {accordionOpen, setAccordionOpen,
     accordionBodyKey, setAccordionBodyKey,
@@ -20,9 +20,15 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
     alertChecked, setAlertChecked,
     place, setPlace,
     chop, setChop,
-    deleteGamePlayer,
     updateGamePlayer,
-    resetToOriginalState} = useEditPlayer(props.gamePlayer);
+    deleteGamePlayer,
+    resetGamePlayer} = useEditPlayer(props.gamePlayer);
+
+  const update = (e: any) => {
+    // @ts-ignore
+    accordionRef.current.click();
+    updateGamePlayer(e);
+  }
 
   const renderPlaces = (gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>) => {
     // Build an array of the places taken
@@ -58,7 +64,7 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
           const wasOpen = accordionOpen;
           setAccordionOpen(!accordionOpen);
           if (wasOpen) {
-            resetToOriginalState(props.gamePlayer);
+            resetGamePlayer();
             // Change the key and the body component will refresh
             setAccordionBodyKey(Math.random())
           }
@@ -66,7 +72,7 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
           {props.gamePlayer.roundUpdates ? <i className="fa-solid fa-bell"></i> : ''} {props.gamePlayer.name}
         </Accordion.Button>
         <Accordion.Body key={accordionBodyKey}>
-          <Form>
+          <Form onSubmit={update}>
             <Form.Control type={'hidden'} id={'gamePlayerId'} value={props.gamePlayer.id}/>
             <Form.Group style={{margin: "10px"}}>
               <Form.Check inline
@@ -157,22 +163,9 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
                   </Button>
                 </Col>
                 <Col>
-                  {/*TODO*/}
-                  {/*<Button variant="primary" onClick={() => {*/}
-                  {/*  updateGamePlayer(GamePlayerData.fromObj({*/}
-                  {/*    buyin: buyInChecked,*/}
-                  {/*    rebuy: rebuyChecked,*/}
-                  {/*    annual: annualTocChecked,*/}
-                  {/*    quarterly: qTocChecked,*/}
-                  {/*    alert: alertChecked,*/}
-                  {/*    place: place,*/}
-                  {/*    chop: chop}));*/}
-                  {/*  // must come after getting the state because the click will reset the state*/}
-                  {/*  // @ts-ignore*/}
-                  {/*  accordionRef.current.click();*/}
-                  {/*}}>*/}
-                  {/*  Update*/}
-                  {/*</Button>*/}
+                  <Button variant="primary" type="submit">
+                    Update
+                  </Button>
                 </Col>
               </Row>
             </Container>
