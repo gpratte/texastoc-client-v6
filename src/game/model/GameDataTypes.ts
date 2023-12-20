@@ -29,6 +29,8 @@ export type GamePlayerData = {
   tocChopPoints?: number;
   qtocPoints?: number;
   qtocChopPoints?: number;
+  knockedOut?: boolean,
+  clockAlert?: boolean,
   place?: number;
 }
 export type GamePayout = {

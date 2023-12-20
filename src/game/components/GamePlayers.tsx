@@ -97,7 +97,7 @@ function GamePlayers() {
         </tbody>
       </Table>
 
-      <AddPlayer types={ {showAddPlayer, setShowAddPlayer} } />
+      <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} />
 
       <div>
         <Button variant="primary" onClick={() => setShowAddPlayer(true)}>

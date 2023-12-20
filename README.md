@@ -20,6 +20,12 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-12-update-game-player
+Update the game player. After update close the edit component and refresh the game.
+
+If the edit is cancelled then also close the edit component and refresh the game. Refreshing 
+the game cancels any edits done on the the player that were not updated.
+
 ### step-11-get-game-add-player
 Figure out what is the current game of the current season and show it. 
 Also allow a player to be added to the game.

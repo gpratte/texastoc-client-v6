@@ -113,18 +113,32 @@ const gameClient = {
       throw error;
     }
   },
-  updatePlayer: async (gamePlayer: GamePlayerData): Promise<GamePlayerData> => {
-    // delay 1 to 3 seconds
-    await delay(getRandomInt(1000, 3000));
-    // One in four will error
-    if (getRandomInt(0, 4) === 1) {
-      throw {
-        id: Math.random(),
-        type: 'Error',
-        message: 'uh oh could not add player' + Date.now()
-      };
+  updatePlayer: async (gameId: number, gamePlayer: GamePlayerData, navigate: NavigateFunction): Promise<GamePlayerData | null> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return null;
     }
-    return {...gamePlayer};
+    try {
+      const result = await server.patch(`/api/v4/games/${gameId}/players/${gamePlayer.id}`,
+        gamePlayer,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      return result.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
   },
 
   deletePlayer: async (gameId: number, gamePlayerId: number) => {
