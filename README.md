@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+###  step-14-clock
+Fully functional game clock (start, pause, resume, change time, change round),
+
 ### step-13-delete-player
 Delete a game player and refresh the game.
 
