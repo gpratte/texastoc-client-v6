@@ -162,6 +162,56 @@ const gameClient = {
       }
       throw error;
     }
+  },
+  finalize: async (gameId: number, navigate: NavigateFunction): Promise<void> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    try {
+      await server.put(`/api/v4/games/${gameId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/vnd.texastoc.finalize+json'
+          }
+        });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
+  },
+  unfinalize: async (gameId: number, navigate: NavigateFunction): Promise<void> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    try {
+      await server.put(`/api/v4/games/${gameId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/vnd.texastoc.unfinalize+json'
+          }
+        });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
+    }
   }
 }
 

@@ -1,14 +1,16 @@
 import {Button, Table} from "react-bootstrap";
 import AddPlayer from "./AddPlayer";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {GameContext, GameContextType} from "./Game";
 import EditPlayer from "./EditPlayer";
 import {GamePlayerData} from "../model/GameDataTypes";
 import useGamePlayers from "../hooks/useGamePlayers";
+import {gameOver} from "../gameUtils";
 
 function GamePlayers() {
 
   const {game} = useContext(GameContext) as GameContextType;
+  const isGameOver = gameOver(game.players);
 
   const {
     showAddPlayer,
@@ -97,14 +99,19 @@ function GamePlayers() {
         </tbody>
       </Table>
 
-      <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} />
+      {
+        !isGameOver &&
+        <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} />
+      }
 
-      <div>
-        <Button variant="primary" onClick={() => setShowAddPlayer(true)}>
-          Add Player
-        </Button>
-      </div>
-
+      {
+        !isGameOver &&
+        <div>
+          <Button variant="primary" onClick={() => setShowAddPlayer(true)}>
+            Add Player
+          </Button>
+        </div>
+      }
     </div>
   )
 }

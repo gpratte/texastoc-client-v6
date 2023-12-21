@@ -10,6 +10,7 @@ import {gameOver} from "../gameUtils";
 import Details from "./Details";
 import GamePlayers from "./GamePlayers";
 import ClockPolling from "./ClockPolling";
+import Finalize from "./Finalize";
 
 export interface GameContextType {
   game: GameData;
@@ -55,6 +56,7 @@ function Game(props) {
           <ClockPolling game={game}/>
         }
         <GamePlayers />
+        <Finalize />
       </div>
     </GameContext.Provider>
   )
