@@ -76,7 +76,6 @@ function useGame(seasonId: number, gameId : number) {
   }, [])
 
   const refreshGame = async (gameId : number): Promise<void> => {
-    console.log('refresh game')
     try {
       setIsLoading(true);
       const game = await gameClient.getGame(gameId, navigate);

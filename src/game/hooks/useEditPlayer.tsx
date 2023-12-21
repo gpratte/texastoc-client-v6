@@ -29,14 +29,14 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
 
   const deleteGamePlayer = async (gamePlayerId: number) => {
     try {
-      await gameClient.deletePlayer(game.id, gamePlayerId);
+      await gameClient.deletePlayer(game.id, gamePlayerId, navigate);
+      refreshGame(game.id);
     } catch (error) {
       newNotification(new NotificationDataBuilder()
         .withObj(error)
         .withMessage("Problem deleting player")
         .build());
     }
-    refreshGame(game.id);
   }
 
   const updateGamePlayer = async (e: any) => {

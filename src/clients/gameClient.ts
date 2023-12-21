@@ -1,6 +1,6 @@
 import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
-import {clearToken, delay, getRandomInt, getToken} from "../utils/util";
+import {clearToken, getToken} from "../utils/util";
 import {
   AddExistingPlayerData,
   AddNewPlayerData,
@@ -34,7 +34,6 @@ const gameClient = {
       throw error;
     }
   },
-
   getGame: async (id: number, navigate: NavigateFunction): Promise<GameData | null> => {
     const token = getToken();
     if (!token) {
@@ -140,17 +139,28 @@ const gameClient = {
       throw error;
     }
   },
-
-  deletePlayer: async (gameId: number, gamePlayerId: number) => {
-    // delay 1 to 2 seconds
-    await delay(getRandomInt(1000, 2000));
-    // One in four will error
-    if (getRandomInt(0, 4) === 1) {
-      throw {
-        id: Math.random(),
-        type: 'Error',
-        message: 'uh oh could not delete player' + Date.now()
-      };
+  deletePlayer: async (gameId: number, gamePlayerId: number, navigate: NavigateFunction): Promise<void> => {
+    const token = getToken();
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    try {
+      await server.delete(`/api/v4/games/${gameId}/players/${gamePlayerId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if ((error as AxiosError).response?.status === 403) {
+          clearToken();
+          navigate("/login");
+          throw new Error("Token expired");
+        }
+      }
+      throw error;
     }
   }
 }
