@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-13-delete-player
+Delete a game player and refresh the game.
+
 ### step-12-update-game-player
 Update the game player. After update close the edit component and refresh the game.
 
