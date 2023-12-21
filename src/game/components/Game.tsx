@@ -6,8 +6,10 @@ import {Accordion} from "react-bootstrap";
 import Loading from "../../common/components/Loading";
 import {GameData} from "../model/GameDataTypes";
 import useGame from "../hooks/useGame";
+import {gameOver} from "../gameUtils";
 import Details from "./Details";
 import GamePlayers from "./GamePlayers";
+import ClockPolling from "./ClockPolling";
 
 export interface GameContextType {
   game: GameData;
@@ -20,6 +22,7 @@ export const GameContext = createContext<GameContextType | null>(null);
 function Game(props) {
   const seasonId : number = props.seasonId;
   const game: GameData = props.game;
+  const isGameOver = gameOver(game.players);
 
   const {
     isLoading,
@@ -47,6 +50,10 @@ function Game(props) {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
+        {
+          !isGameOver &&
+          <ClockPolling game={game}/>
+        }
         <GamePlayers />
       </div>
     </GameContext.Provider>
