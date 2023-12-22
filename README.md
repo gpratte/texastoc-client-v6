@@ -20,6 +20,10 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-17-notification-show-error-details
+If there are error details show them in the notification. Scroll up to the top of the 
+browser window when a notification appears.
+
 ### step-16-linting
 Run the command _npm run lint_ and fix the linter issues.
 
