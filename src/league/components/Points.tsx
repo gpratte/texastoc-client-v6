@@ -12,9 +12,7 @@ function Points(props) {
   const points : any = settings?.points;
   const keys = points ? Object.keys(points) : null;
 
-  const {
-    isLoading
-  } = usePoints();
+  usePoints();
 
   const renderPoints1Through10 = (point : any) => {
     return (

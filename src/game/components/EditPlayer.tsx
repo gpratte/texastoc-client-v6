@@ -18,7 +18,7 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
     annualTocChecked, setAnnualTocChecked,
     qTocChecked, setQTocChecked,
     alertChecked, setAlertChecked,
-    place, setPlace,
+    setPlace,
     chop, setChop,
     updateGamePlayer,
     deleteGamePlayer,

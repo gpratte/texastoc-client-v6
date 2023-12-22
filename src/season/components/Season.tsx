@@ -18,9 +18,7 @@ function Season(props) {
   const season: SeasonData | undefined = props.season;
   const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(false)
 
-  const {
-    isLoading
-  } = useSeason(seasonId);
+  useSeason(seasonId);
 
   if (_.isEmpty(season)) {
     return (

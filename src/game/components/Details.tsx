@@ -1,6 +1,6 @@
-import moment from 'moment-timezone'
 import {Table} from "react-bootstrap";
 import {GameData, GamePayout} from "../model/GameDataTypes";
+import {convertDateToString} from "../../utils/util";
 
 // @ts-ignore
 function Details(props) {
@@ -10,7 +10,7 @@ function Details(props) {
     kittyCalculated, prizePotCalculated, payouts
   } = game;
 
-  const gameDate = date ? moment(date).tz('America/Chicago').format('MM/DD') : 'Unknown'
+  const gameDate = convertDateToString(date);
   hostName = hostName ? hostName : 'Unknown';
   let tocPlusKitty = 0;
   if (totalCombinedTocCalculated || kittyCalculated) {

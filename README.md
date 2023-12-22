@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-16-linting
+Run the command _npm run lint_ and fix the linter issues.
+
 ### step-15-end-game
 If all the places have been determined (e.g. top 10 if game has 10 or more people, top seven if
 the game has 7 people, ...) then allow the game to be ended.

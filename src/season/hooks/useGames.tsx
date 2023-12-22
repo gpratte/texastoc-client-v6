@@ -9,7 +9,7 @@ import {GameData} from "../../game/model/GameDataTypes";
 
 export default function useGames(seasonId: number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification, refreshGame} = useContext(LeagueContext) as LeagueContextType;
+  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   useEffect(() => {

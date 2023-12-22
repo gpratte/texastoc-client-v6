@@ -13,9 +13,7 @@ function Games(props) {
   const seasonId: number = props.seasonId;
   const games : Array<GameData> = props.games;
 
-  const {
-    isLoading,
-  } = useGames(seasonId);
+  useGames(seasonId);
 
   if (_.isEmpty(games)) {
     return (
