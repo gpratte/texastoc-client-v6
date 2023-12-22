@@ -1,6 +1,6 @@
 import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
-import {clearToken, getToken} from "../utils/util";
+import {clearToken, getToken, tokenExpired} from "../utils/util";
 import {
   AddExistingPlayerData,
   AddNewPlayerData,
@@ -25,7 +25,7 @@ const gameClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -49,7 +49,7 @@ const gameClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -76,7 +76,7 @@ const gameClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -103,7 +103,7 @@ const gameClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -130,7 +130,7 @@ const gameClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -154,7 +154,7 @@ const gameClient = {
         });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -171,6 +171,7 @@ const gameClient = {
     }
     try {
       await server.put(`/api/v4/games/${gameId}`,
+        {},
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -179,7 +180,7 @@ const gameClient = {
         });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -196,6 +197,7 @@ const gameClient = {
     }
     try {
       await server.put(`/api/v4/games/${gameId}`,
+        {},
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -204,7 +206,7 @@ const gameClient = {
         });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");

@@ -24,7 +24,7 @@ const Home = () => {
           <Button variant="outline-secondary"> Season </Button>
         </Link>
         &nbsp;
-        <Link to="/current-game">
+        <Link to="/current-game/0">
           <Button variant="outline-secondary"> Game </Button>
         </Link>
       </p>

@@ -1,6 +1,6 @@
 import '../../common/style/common.css'
 import _ from "lodash";
-import React, {createContext, useState} from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 import {Accordion} from "react-bootstrap";
 import Loading from "../../common/components/Loading";
@@ -12,13 +12,6 @@ import GamePlayers from "./GamePlayers";
 import ClockPolling from "./ClockPolling";
 import Finalize from "./Finalize";
 
-export interface GameContextType {
-  game: GameData;
-  refreshGame : (n : number) => void;
-}
-
-export const GameContext = createContext<GameContextType | null>(null);
-
 // @ts-ignore
 function Game(props) {
   const seasonId : number = props.seasonId;
@@ -27,8 +20,7 @@ function Game(props) {
 
   const {
     isLoading,
-    refreshGame
-  } = useGame(seasonId, game.id || 0);
+  } = useGame(seasonId || 0, game.id || 0);
 
   const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(false)
 
@@ -37,7 +29,7 @@ function Game(props) {
   }
 
   return (
-    <GameContext.Provider value={{game, refreshGame}}>
+    <>
       <Loading isLoading={isLoading}/>
       <div>
         <Accordion flush>
@@ -47,7 +39,7 @@ function Game(props) {
               <i className="fa-solid fa-chevron-down"></i>}
             </Accordion.Button>
             <Accordion.Body>
-              <Details />
+              <Details game={game}/>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
@@ -55,10 +47,10 @@ function Game(props) {
           !isGameOver &&
           <ClockPolling game={game}/>
         }
-        <GamePlayers />
-        <Finalize />
+        <GamePlayers game={game}/>
+        <Finalize game={game}/>
       </div>
-    </GameContext.Provider>
+    </>
   )
 }
 

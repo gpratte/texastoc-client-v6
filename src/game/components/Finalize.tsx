@@ -2,13 +2,17 @@ import React from "react";
 import {gameOver} from "../gameUtils";
 import {Button} from "react-bootstrap";
 import useFinalize from "../hooks/useFinalize";
+import {GameData} from "../model/GameDataTypes";
 
-function Finalize() {
+// @ts-ignore
+function Finalize(props) {
+
+  const game: GameData = props.game;
+
   const {
-    game,
     finalize,
     unfinalize
-  } = useFinalize();
+  } = useFinalize(game.id);
 
   const isGameOver = gameOver(game.players);
 

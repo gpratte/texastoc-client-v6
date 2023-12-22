@@ -1,19 +1,17 @@
 import {useContext} from "react";
-import {GameContext, GameContextType} from "../components/Game";
-import {NotificationContext, NotificationContextType} from "../../league/components/League";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
 
-function useFinalize() {
-  const {game, refreshGame} = useContext(GameContext) as GameContextType;
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+function useFinalize(gameId: number) {
+  const {newNotification, refreshGame} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   const finalize = async () => {
     try {
-      await gameClient.finalize(game.id, navigate);
-      refreshGame(game.id);
+      await gameClient.finalize(gameId, navigate);
+      refreshGame(gameId);
       // TODO
       // refresh season
     } catch (error) {
@@ -26,8 +24,8 @@ function useFinalize() {
 
   const unfinalize = async () => {
     try {
-      await gameClient.unfinalize(game.id, navigate);
-      refreshGame(game.id);
+      await gameClient.unfinalize(gameId, navigate);
+      refreshGame(gameId);
       // TODO
       // refresh season
     } catch (error) {
@@ -39,7 +37,6 @@ function useFinalize() {
   }
 
   return {
-    game,
     finalize,
     unfinalize
   };

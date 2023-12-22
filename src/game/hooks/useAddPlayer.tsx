@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import seasonClient from "../../clients/seasonClient";
 import gameClient from "../../clients/gameClient";
 import leagueClient from "../../clients/leagueClient";
-import {NotificationContext, NotificationContextType} from "../../league/components/League";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
@@ -18,7 +18,7 @@ function useAddPlayer(seasonId: number,
   const [seasonPlayers, setSeasonPlayers] = useState<Array<SeasonPlayerData>>([])
   const [activeTabKey, setActiveTabKey] = useState<string>('league-player');
 
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   useEffect(() => {

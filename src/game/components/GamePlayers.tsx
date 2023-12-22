@@ -1,15 +1,14 @@
 import {Button, Table} from "react-bootstrap";
 import AddPlayer from "./AddPlayer";
-import React, {useContext} from "react";
-import {GameContext, GameContextType} from "./Game";
+import React from "react";
 import EditPlayer from "./EditPlayer";
-import {GamePlayerData} from "../model/GameDataTypes";
+import {GameData, GamePlayerData} from "../model/GameDataTypes";
 import useGamePlayers from "../hooks/useGamePlayers";
 import {gameOver} from "../gameUtils";
 
-function GamePlayers() {
-
-  const {game} = useContext(GameContext) as GameContextType;
+// @ts-ignore
+function GamePlayers(props) {
+  const game: GameData = props.game;
   const isGameOver = gameOver(game.players);
 
   const {
@@ -73,8 +72,6 @@ function GamePlayers() {
   }
 
   // @ts-ignore
-  // @ts-ignore
-  // @ts-ignore
   return (
     <div>
       <p>Paid Players: {numPaidPlayers}</p>
@@ -101,7 +98,7 @@ function GamePlayers() {
 
       {
         !isGameOver &&
-        <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} />
+        <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} game={game}/>
       }
 
       {

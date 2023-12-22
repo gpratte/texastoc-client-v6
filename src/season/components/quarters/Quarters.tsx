@@ -20,7 +20,7 @@ function Quarters(props) {
   const renderQuarters = (quarters : Array<any>) => {
     return quarters.map(quarter => {
       return (
-        <Accordion.Item eventKey={quarterlyName(quarter.quarter)}>
+        <Accordion.Item key={quarter.quarter} eventKey={quarterlyName(quarter.quarter)}>
           <Accordion.Header>{quarterlyName(quarter.quarter)}</Accordion.Header>
           <Accordion.Body>
             <QuarterlySeason quarter={quarter}/>

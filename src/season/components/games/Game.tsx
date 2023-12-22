@@ -4,10 +4,11 @@ import {convertDateToString} from "../../../utils/util";
 import Table from "react-bootstrap/Table";
 import GameStandings from "./GameStandings";
 import Payouts from "../Payouts";
+import {Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 // @ts-ignore
 function Game(props) {
-
   const game : GameData = props.game;
   const {date, hostName, seasonGameNum, quarterlyGameNum, totalCollected, annualTocCollected, annualTocFromRebuyAddOnCalculated, payouts, players, prizePotCalculated, quarterlyTocCollected, kittyCalculated} = game;
   const annualToc = annualTocCollected + annualTocFromRebuyAddOnCalculated;
@@ -63,6 +64,10 @@ function Game(props) {
 
         <GameStandings players={players}/>
         <Payouts payouts={payouts}/>
+
+        <Link to={`/current-game/${game.id}`} >
+          <Button variant="outline-secondary"> Edit </Button>
+        </Link>
       </div>
     </>
   )
