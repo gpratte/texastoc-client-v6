@@ -15,6 +15,7 @@ function useNotifications(delay = 2500) {
       setNotification(notify);
       // Auto close after x seconds
     }
+    window.scrollTo(0,0);
   }
 
   const deleteNotification = (id: number): void => {

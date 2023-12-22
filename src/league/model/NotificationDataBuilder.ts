@@ -4,10 +4,21 @@ export enum NotificationType {
     UNKNOWN = "Unknown"
 }
 
-export interface NotificationData {
+export type NotificationData = {
     id: number;
     message: string;
     type: NotificationType;
+}
+
+export type NotificationErrorDataDetails = {
+    target?: string;
+    message?: string;
+}
+
+export type NotificationErrorData = {
+    code?: string;
+    message?: string;
+    details?: Array<NotificationErrorDataDetails>
 }
 
 export class NotificationDataBuilder {
@@ -44,7 +55,7 @@ export class NotificationDataBuilder {
                 if (this.notification!.message === "Unknown") {
                     this.notification!.message = (this.obj as Error).message;
                 } else {
-                    this.notification!.message += ": " + (this.obj as Error).message;
+                    this.notification!.message += ": " + NotificationDataBuilder.parseError(this.obj as Error);
                 }
             } else {
                 if (this.notification!.message === "Unknown") {
@@ -55,5 +66,21 @@ export class NotificationDataBuilder {
             }
         }
         return this.notification!;
+    }
+
+    private static parseError(err: Error): string {
+        // @ts-ignore
+        if (err.response?.data) {
+            // @ts-ignore
+            const errorData: NotificationErrorData = err.response!.data as NotificationErrorData;
+            let message = `${errorData.message} ` || '';
+            if (errorData.details && errorData.details.length > 0) {
+                message += `${errorData.details[0].target} ${errorData.details[0].message}`
+            }
+            return message;
+        } else {
+            return err.message;
+        }
+
     }
 }
