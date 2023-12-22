@@ -1,33 +1,34 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/league.css'
-import useNotifications from "../hooks/useNotifications";
+import {connect} from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React, {createContext} from "react";
 import {Route, Routes} from "react-router-dom";
-import Navigation from "./Navigation";
-import ErrorNotification from "./ErrorNotification";
-import Notifications from "./Notifications";
-import Footer from "./Footer";
 import Home from "../../home/components/Home";
 import Game from "../../game/components/Game";
 import Season from "../../season/components/Season";
 import Loading from "../../common/components/Loading";
-import {NotificationData} from "../model/NotificationDataBuilder";
 import Login from "../../login/components/Login";
+import useNotifications from "../hooks/useNotifications";
+import {NotificationData} from "../model/NotificationDataBuilder";
+import useLeague from "../hooks/useLeague";
+import Navigation from "./Navigation";
+import ErrorNotification from "./ErrorNotification";
+import Notifications from "./Notifications";
+import Footer from "./Footer";
 import LeaguePlayers from "./LeaguePlayers";
 import Rounds from "./Rounds";
 import Points from "./Points";
-import {connect} from "react-redux";
-import useLeague from "../hooks/useLeague";
 
-export interface NotificationContextType {
+export interface LeagueContextType {
   newNotification(notify: NotificationData): void;
-  toggleLoadingGlobal(show: boolean): void;
   isGlobalLoading: boolean;
+  toggleLoadingGlobal(show: boolean): void;
+  refreshGame: (gameId: number) => Promise<void>;
 }
-export const NotificationContext = createContext<NotificationContextType | null>(null);
+export const LeagueContext = createContext<LeagueContextType | null>(null);
 
 // @ts-ignore
 function League(props) {
@@ -49,11 +50,12 @@ function League(props) {
   } = useNotifications(30000);
 
   const {
-    isLoading
+    isLoading,
+    refreshGame
   } = useLeague(seasonId, newNotification);
 
   return (
-    <NotificationContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal}}>
+    <LeagueContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal, refreshGame}}>
       <div>
         <Loading isLoading={isGlobalLoading}/>
         <Navigation notifications={notifications} showNotifications={showNotificationsPanel}/>
@@ -78,6 +80,7 @@ function League(props) {
                 <Route path="/home/*" element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path="/current-game" element={<Game seasonId={seasonId}/>} />
+                <Route path="/current-game/:editGameId" element={<Game seasonId={seasonId}/>} />
                 <Route path="/season" element={<Season seasonId={seasonId}/>} />
                 <Route path="/players" element={<LeaguePlayers />} />
                 <Route path="/rounds" element={<Rounds />} />
@@ -92,7 +95,7 @@ function League(props) {
           </Row>
         </Container>
       </div>
-    </NotificationContext.Provider>
+    </LeagueContext.Provider>
   )
 }
 

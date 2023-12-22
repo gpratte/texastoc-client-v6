@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {GameData} from "../../../game/model/GameDataTypes";
 import useGames from "../../hooks/useGames";
 import _ from "lodash";
-import {Accordion, Button} from "react-bootstrap";
+import {Accordion} from "react-bootstrap";
 import {convertDateToString} from "../../../utils/util";
 import Game from "./Game";
 
@@ -14,13 +14,8 @@ function Games(props) {
   const games : Array<GameData> = props.games;
 
   const {
-    isLoading
+    isLoading,
   } = useGames(seasonId);
-
-  const unlock = (id : number) => {
-    // TODO
-    //unfinalize(id);
-  }
 
   if (_.isEmpty(games)) {
     return (
@@ -33,21 +28,15 @@ function Games(props) {
   const renderGames = (games: Array<GameData>) => {
     return games.map((game : GameData) => {
       return (
-        <Accordion>
+        <Accordion key={game.id}>
           <Accordion.Item eventKey={game.id.toString()}>
             <Accordion.Header>
-              {convertDateToString(game.date)}
+              {convertDateToString(game.date)}&nbsp;&nbsp;
               {
-                game.finalized &&
-                <Button variant="link" onClick={() => unlock(game.id)}>
-                  <i className="fas fa-lock"/>
-                </Button>
+                game.finalized && <i className="fas fa-lock"/>
               }
               {
-                !game.finalized &&
-                <Button variant="link" onClick={() => unlock(game.id)}>
-                  <i className="fas fa-lock-open"/>
-                </Button>
+                !game.finalized && <i className="fas fa-lock-open"/>
               }
             </Accordion.Header>
             <Accordion.Body>

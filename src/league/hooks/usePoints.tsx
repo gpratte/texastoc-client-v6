@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import {NotificationDataBuilder, NotificationType} from "../model/NotificationDataBuilder";
-import {NotificationContext, NotificationContextType} from "../components/League";
+import {LeagueContext, LeagueContextType} from "../components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import {useNavigate} from "react-router-dom";
 import leagueClient from "../../clients/leagueClient";
@@ -9,7 +9,7 @@ import refreshSettingsAction from "../redux/refreshSettingsAction";
 
 export default function usePoints() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   useEffect(() => {

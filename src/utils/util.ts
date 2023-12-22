@@ -1,4 +1,5 @@
 import moment from "moment-timezone";
+import { jwtDecode } from "jwt-decode";
 
 export function convertDateToString(dateAry: Array<number>) : string {
   const date = new Date(dateAry[0], dateAry[1]-1, dateAry[2]);
@@ -54,4 +55,11 @@ export function obfuscateEmail(email : string | undefined | null) {
     obfuscatedEmail += email.substring(indexOfAt);
   }
   return obfuscatedEmail;
+}
+
+export function tokenExpired(token: string) {
+  const nowInSeconds = Math.round(Date.now() / 1000);
+  const decoded = jwtDecode(token);
+  const expired = decoded.exp;
+  return nowInSeconds > expired!;
 }

@@ -1,7 +1,7 @@
 import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
 import {SeasonData} from "../season/model/SeasonDataTypes";
-import {getToken, clearToken} from '../utils/util';
+import {getToken, clearToken, tokenExpired} from '../utils/util';
 import {NavigateFunction} from "react-router-dom";
 
 const seasonClient = {
@@ -24,7 +24,7 @@ const seasonClient = {
       return 0;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -48,7 +48,7 @@ const seasonClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");

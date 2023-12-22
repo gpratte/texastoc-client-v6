@@ -4,19 +4,18 @@ import {Button, Form, Modal, Spinner, Tab, Tabs} from "react-bootstrap";
 import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import useAddPlayer from "../hooks/useAddPlayer";
-import {GamePlayerData} from "../model/GameDataTypes";
-import {GameContext, GameContextType} from "./Game";
+import {GameData, GamePlayerData} from "../model/GameDataTypes";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 
 // @ts-ignore
 function AddPlayer(props) {
-
+  const game: GameData = props.game;
   const showAddPlayer: boolean = props.showAddPlayer;
   const setShowAddPlayer: (value: (((prevState: boolean) => boolean) | boolean)) => void = props.setShowAddPlayer;
 
   const {
-    game,
     refreshGame
-  } = useContext(GameContext) as GameContextType;
+  } = useContext(LeagueContext) as LeagueContextType;
   const gamePlayers = game.players;
 
   const {

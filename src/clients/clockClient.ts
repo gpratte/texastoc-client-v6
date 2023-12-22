@@ -1,7 +1,7 @@
 import axios, {AxiosError} from "axios";
 import {NavigateFunction} from "react-router-dom";
 import {server} from "../utils/api";
-import {getToken, clearToken} from '../utils/util';
+import {getToken, clearToken, tokenExpired} from '../utils/util';
 import {ClockData} from "../game/model/ClockDataTypes";
 
 const clockClient = {
@@ -20,7 +20,7 @@ const clockClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -62,7 +62,7 @@ const clockClient = {
       });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");

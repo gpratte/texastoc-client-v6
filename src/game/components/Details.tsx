@@ -1,12 +1,10 @@
 import moment from 'moment-timezone'
 import {Table} from "react-bootstrap";
 import {GameData, GamePayout} from "../model/GameDataTypes";
-import {useContext} from "react";
-import {GameContext, GameContextType} from "./Game";
 
-function Details() {
-
-  const {game} = useContext(GameContext) as GameContextType;
+// @ts-ignore
+function Details(props) {
+  const game: GameData = props.game;
   let {
     date, hostName, totalCollected, totalCombinedTocCalculated,
     kittyCalculated, prizePotCalculated, payouts

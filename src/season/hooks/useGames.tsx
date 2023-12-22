@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
-import {NotificationContext, NotificationContextType} from "../../league/components/League";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import {useNavigate} from "react-router-dom";
 import gameClient from "../../clients/gameClient";
@@ -9,7 +9,7 @@ import {GameData} from "../../game/model/GameDataTypes";
 
 export default function useGames(seasonId: number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {newNotification, refreshGame} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,4 +42,5 @@ export default function useGames(seasonId: number) {
   return {
     isLoading
   };
+
 }

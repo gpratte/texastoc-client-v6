@@ -1,6 +1,6 @@
 import {server} from "../utils/api";
 import axios, {AxiosError} from "axios";
-import {clearToken, getToken} from "../utils/util";
+import {clearToken, getToken, tokenExpired} from "../utils/util";
 import {NavigateFunction} from "react-router-dom";
 import {LeaguePlayerData, Round, Settings} from "../league/model/LeagueDataTypes";
 
@@ -20,7 +20,7 @@ const leagueClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -44,7 +44,7 @@ const leagueClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -68,7 +68,7 @@ const leagueClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");
@@ -92,7 +92,7 @@ const leagueClient = {
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403) {
+        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
           clearToken();
           navigate("/login");
           throw new Error("Token expired");

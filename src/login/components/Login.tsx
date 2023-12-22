@@ -4,11 +4,11 @@ import {login} from '../loginClient'
 import {Form} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import {Link, Navigate} from "react-router-dom";
-import {NotificationContext, NotificationContextType} from "../../league/components/League";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 
 const Login = () => {
 
-  const {toggleLoadingGlobal, newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
 
   const signIn = (e: React.SyntheticEvent) => {
     e.preventDefault();

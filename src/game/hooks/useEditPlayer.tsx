@@ -1,15 +1,12 @@
 import {useContext, useState} from "react";
-import {GameContext, GameContextType} from "../components/Game";
-import {NotificationContext, NotificationContextType} from "../../league/components/League";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import gameClient from "../../clients/gameClient";
 import {GamePlayerData} from "../model/GameDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
 
 function useEditPlayer(gamePlayer: GamePlayerData) {
-
-  const {game, refreshGame} = useContext(GameContext) as GameContextType;
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {newNotification, refreshGame} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   const [accordionOpen, setAccordionOpen] = useState(false);
@@ -29,8 +26,8 @@ function useEditPlayer(gamePlayer: GamePlayerData) {
 
   const deleteGamePlayer = async (gamePlayerId: number) => {
     try {
-      await gameClient.deletePlayer(game.id, gamePlayerId, navigate);
-      refreshGame(game.id);
+      await gameClient.deletePlayer(gamePlayer.gameId, gamePlayerId, navigate);
+      refreshGame(gamePlayer.gameId);
     } catch (error) {
       newNotification(new NotificationDataBuilder()
         .withObj(error)

@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
-import {NotificationContext} from "../../league/components/League";
+import { useParams } from 'react-router-dom';
 import gameClient from "../../clients/gameClient";
 import {GameData} from "../model/GameDataTypes";
 import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
-import {NotificationContextType} from "../../league/components/League";
+import {LeagueContextType, LeagueContext} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import refreshGameAction from "../redux/refreshGameAction";
 import {useNavigate} from "react-router-dom";
@@ -12,8 +12,9 @@ import {getSeason} from "../../season/seasonUtils";
 
 function useGame(seasonId: number, gameId : number) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification} = useContext(NotificationContext) as NotificationContextType;
+  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
+  const { editGameId } = useParams();
 
   useEffect(() => {
     async function init() {
@@ -23,7 +24,7 @@ function useGame(seasonId: number, gameId : number) {
         if (currentSeasonId === 0) {
           currentSeasonId = await getSeason(navigate, newNotification);
         }
-        let currentGameId = gameId;
+        let currentGameId: number = editGameId ? parseInt(editGameId) : gameId;
         if (currentSeasonId !== 0 && currentGameId === 0) {
           const games : Array<GameData> | null = await gameClient.getGames(currentSeasonId, navigate);
           if (games === null) {
@@ -75,30 +76,7 @@ function useGame(seasonId: number, gameId : number) {
     // eslint-disable-next-line
   }, [])
 
-  const refreshGame = async (gameId : number): Promise<void> => {
-    try {
-      setIsLoading(true);
-      const game = await gameClient.getGame(gameId, navigate);
-      if (game) {
-        leagueStore.dispatch(refreshGameAction(game));
-      } else {
-        newNotification(new NotificationDataBuilder()
-          .withMessage(`Problem getting game ${gameId}`)
-          .withType(NotificationType.ERROR)
-          .build());
-      }
-    } catch (error) {
-      newNotification(new NotificationDataBuilder()
-        .withObj(error)
-        .withMessage("Problem getting game")
-        .build());
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   return {
-    refreshGame,
     isLoading
   };
 }

@@ -20,6 +20,13 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-15-end-game
+If all the places have been determined (e.g. top 10 if game has 10 or more people, top seven if
+the game has 7 people, ...) then allow the game to be ended.
+
+When viewing a game in the list of games for the season show and Edit button. When pressed
+the current game view is shown for the game.
+
 ###  step-14-clock
 Fully functional game clock (start, pause, resume, change time, change round),
 
