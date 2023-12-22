@@ -10,9 +10,7 @@ function LeaguePlayers(props) {
 
   const leaguePlayers: Array<LeaguePlayerData> = props.leaguePlayers;
 
-  const {
-    isLoading
-  } = useLeaguePlayers();
+  useLeaguePlayers();
 
   const renderLeaguePlayers = (leaguePlayers: Array<LeaguePlayerData>) => {
     if (!leaguePlayers) {

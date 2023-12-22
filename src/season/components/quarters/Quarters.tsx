@@ -13,9 +13,7 @@ function Quarters(props) {
   const seasonId: number = props.seasonId;
   const quarterlies: Array<QuarterlySeasonData> | [] = props.quarterlies;
 
-  const {
-    isLoading
-  } = useQuarterlySeasons(seasonId);
+  useQuarterlySeasons(seasonId);
 
   const renderQuarters = (quarters : Array<any>) => {
     return quarters.map(quarter => {

@@ -1,10 +1,11 @@
 import React from "react";
 import '../style/league.css'
+import {VERSION} from '../../utils/constants';
 
 const Footer = () => {
   return (
     <div className={'shim'}>
-      <p>Version?</p>
+      <p>V{VERSION}</p>
     </div>
   )
 }

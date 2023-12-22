@@ -10,9 +10,7 @@ function Rounds(props) {
 
   const rounds: Array<Round> = props.rounds;
 
-  const {
-    isLoading
-  } = useRounds();
+  useRounds();
 
   const renderRound = (round: Round) => {
     return (

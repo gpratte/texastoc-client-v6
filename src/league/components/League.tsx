@@ -50,7 +50,6 @@ function League(props) {
   } = useNotifications(30000);
 
   const {
-    isLoading,
     refreshGame
   } = useLeague(seasonId, newNotification);
 
