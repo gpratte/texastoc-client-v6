@@ -3,14 +3,14 @@ import Container from "react-bootstrap/Container";
 import {Badge, Button, Nav, NavDropdown} from "react-bootstrap";
 import React from "react";
 import {NotificationData} from "../model/NotificationDataBuilder";
-import {logout} from "../../login/loginClient";
+import loginClient from "../../clients/loginClient";
 import {Link, useNavigate} from "react-router-dom";
 
 function Navigation(props: {notifications: Array<NotificationData>, showNotifications: () => void}) {
 
   const navigate = useNavigate();
   const signOut = () => {
-    logout();
+    loginClient.logout();
     navigate("/login");
   }
 

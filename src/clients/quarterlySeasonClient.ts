@@ -6,7 +6,6 @@ import {QuarterlySeasonData} from "../season/model/QuarterlySeasonDataTypes";
 
 const quarterlySeasonClient = {
   getQuarterlies: async (id: number, navigate: NavigateFunction): Promise<Array<QuarterlySeasonData> | null> => {
-    // TODO what to do if there is no token?
     const token = getToken();
     if (!token) {
       navigate("/login");

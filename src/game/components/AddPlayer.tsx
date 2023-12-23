@@ -5,7 +5,7 @@ import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
 import useAddPlayer from "../hooks/useAddPlayer";
 import {GameData, GamePlayerData} from "../model/GameDataTypes";
-import {LeagueContext, LeagueContextType} from "../../league/components/League";
+import {GameContext, GameContextType} from "./Game";
 
 // @ts-ignore
 function AddPlayer(props) {
@@ -15,7 +15,7 @@ function AddPlayer(props) {
 
   const {
     refreshGame
-  } = useContext(LeagueContext) as LeagueContextType;
+  } = useContext(GameContext) as GameContextType;
   const gamePlayers = game.players;
 
   const {
@@ -27,8 +27,6 @@ function AddPlayer(props) {
     setActiveTabKey
   } = useAddPlayer(game.seasonId, game.id, setShowAddPlayer, refreshGame);
 
-
-  // TODO should the processing of the players be moved to a context or a util file?
   const renderPlayers = (leaguePlayers: Array<LeaguePlayerData>,
                          seasonPlayers: Array<SeasonPlayerData>,
                          gamePlayers: Array<GamePlayerData>) => {

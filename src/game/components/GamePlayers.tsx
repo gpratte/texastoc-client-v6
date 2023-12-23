@@ -4,7 +4,7 @@ import React from "react";
 import EditPlayer from "./EditPlayer";
 import {GameData, GamePlayerData} from "../model/GameDataTypes";
 import useGamePlayers from "../hooks/useGamePlayers";
-import {gameOver} from "../gameUtils";
+import {gameOver, isThereChop} from "../gameUtils";
 
 // @ts-ignore
 function GamePlayers(props) {
@@ -17,9 +17,7 @@ function GamePlayers(props) {
   }: { setShowAddPlayer: (value: (((prevState: boolean) => boolean) | boolean)) => void; showAddPlayer: boolean } = useGamePlayers();
 
   const gamePlayers = game.players;
-  // TODO chop
-  //const isChop = this.isThereChop(gamePlayers);
-  const isChop = false;
+  const isChop = isThereChop(gamePlayers);
   const numPaidPlayers = game.numPaidPlayers;
 
   const renderGamePlayers = (gamePlayers: Array<GamePlayerData>, isChop: boolean) => {

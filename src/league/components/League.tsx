@@ -26,7 +26,6 @@ export interface LeagueContextType {
   newNotification(notify: NotificationData): void;
   isGlobalLoading: boolean;
   toggleLoadingGlobal(show: boolean): void;
-  refreshGame: (gameId: number) => Promise<void>;
 }
 export const LeagueContext = createContext<LeagueContextType | null>(null);
 
@@ -49,12 +48,10 @@ function League(props) {
     isGlobalLoading
   } = useNotifications(30000);
 
-  const {
-    refreshGame
-  } = useLeague(seasonId, newNotification);
+  useLeague(seasonId, newNotification);
 
   return (
-    <LeagueContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal, refreshGame}}>
+    <LeagueContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal}}>
       <div>
         <Loading isLoading={isGlobalLoading}/>
         <Navigation notifications={notifications} showNotifications={showNotificationsPanel}/>

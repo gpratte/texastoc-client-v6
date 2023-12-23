@@ -1,6 +1,6 @@
 import '../../common/style/common.css'
 import _ from "lodash";
-import React, {useState} from "react";
+import React, {createContext, useState} from "react";
 import { connect } from "react-redux";
 import {Accordion} from "react-bootstrap";
 import Loading from "../../common/components/Loading";
@@ -12,6 +12,11 @@ import GamePlayers from "./GamePlayers";
 import ClockPolling from "./ClockPolling";
 import Finalize from "./Finalize";
 
+export interface GameContextType {
+  refreshGame : (n : number) => void;
+}
+export const GameContext = createContext<GameContextType | null>(null);
+
 // @ts-ignore
 function Game(props) {
   const seasonId : number = props.seasonId;
@@ -20,6 +25,7 @@ function Game(props) {
 
   const {
     isLoading,
+    refreshGame
   } = useGame(seasonId || 0, game.id || 0);
 
   const [detailsAccordionOpen, setDetailsAccordionOpen] = useState(false)
@@ -29,7 +35,7 @@ function Game(props) {
   }
 
   return (
-    <>
+    <GameContext.Provider value={{refreshGame}}>
       <Loading isLoading={isLoading}/>
       <div>
         <Accordion flush>
@@ -50,7 +56,7 @@ function Game(props) {
         <GamePlayers game={game}/>
         <Finalize game={game}/>
       </div>
-    </>
+    </GameContext.Provider>
   )
 }
 

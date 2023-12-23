@@ -76,8 +76,31 @@ function useGame(seasonId: number, gameId : number) {
     // eslint-disable-next-line
   }, [])
 
+  const refreshGame = async (gameId : number): Promise<void> => {
+    try {
+      setIsLoading(true);
+      const game = await gameClient.getGame(gameId, navigate);
+      if (game) {
+        leagueStore.dispatch(refreshGameAction(game));
+      } else {
+        newNotification(new NotificationDataBuilder()
+          .withMessage(`Problem getting game ${gameId}`)
+          .withType(NotificationType.ERROR)
+          .build());
+      }
+    } catch (error) {
+      newNotification(new NotificationDataBuilder()
+        .withObj(error)
+        .withMessage("Problem getting game")
+        .build());
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return {
-    isLoading
+    isLoading,
+    refreshGame
   };
 }
 
