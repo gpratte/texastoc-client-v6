@@ -21,11 +21,13 @@ import Footer from "./Footer";
 import LeaguePlayers from "./LeaguePlayers";
 import Rounds from "./Rounds";
 import Points from "./Points";
+import {AxiosInstance} from "axios";
 
 export interface LeagueContextType {
   newNotification(notify: NotificationData): void;
   isGlobalLoading: boolean;
   toggleLoadingGlobal(show: boolean): void;
+  server: AxiosInstance
 }
 export const LeagueContext = createContext<LeagueContextType | null>(null);
 
@@ -48,10 +50,12 @@ function League(props) {
     isGlobalLoading
   } = useNotifications(30000);
 
-  useLeague(seasonId, newNotification);
+  const {
+    server
+  } = useLeague(seasonId, newNotification);
 
   return (
-    <LeagueContext.Provider value={{newNotification, isGlobalLoading, toggleLoadingGlobal}}>
+    <LeagueContext.Provider value={{server, newNotification, isGlobalLoading, toggleLoadingGlobal}}>
       <div>
         <Loading isLoading={isGlobalLoading}/>
         <Navigation notifications={notifications} showNotifications={showNotificationsPanel}/>

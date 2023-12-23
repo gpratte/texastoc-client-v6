@@ -2,20 +2,18 @@ import {useContext, useEffect} from "react";
 import {NotificationDataBuilder, NotificationType} from "../model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../components/League";
 import leagueStore from "../../league/redux/leagueStore";
-import {useNavigate} from "react-router-dom";
 import leagueClient from "../../clients/leagueClient";
 import {Settings} from "../model/LeagueDataTypes";
 import refreshSettingsAction from "../redux/refreshSettingsAction";
 
 export default function usePoints() {
-  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
-  const navigate = useNavigate();
+  const {server, toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
 
   useEffect(() => {
     async function init() {
       try {
         toggleLoadingGlobal(true);
-        const settings : Settings | null = await leagueClient.getSettings(navigate);
+        const settings : Settings | null = await leagueClient.getSettings(server);
         if (settings) {
           leagueStore.dispatch(refreshSettingsAction(settings));
         } else {

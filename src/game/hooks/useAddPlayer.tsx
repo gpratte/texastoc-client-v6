@@ -1,5 +1,4 @@
 import {useContext, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import seasonClient from "../../clients/seasonClient";
 import gameClient from "../../clients/gameClient";
 import leagueClient from "../../clients/leagueClient";
@@ -18,20 +17,17 @@ function useAddPlayer(seasonId: number,
   const [seasonPlayers, setSeasonPlayers] = useState<Array<SeasonPlayerData>>([])
   const [activeTabKey, setActiveTabKey] = useState<string>('league-player');
 
-  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
-  const navigate = useNavigate();
+  const {server, newNotification} = useContext(LeagueContext) as LeagueContextType;
 
   useEffect(() => {
     async function init() {
       try {
         setIsLoading(true);
-        const leaguePlayers : Array<LeaguePlayerData> | null = await leagueClient.getPlayers(navigate);
+        const leaguePlayers : Array<LeaguePlayerData> | null = await leagueClient.getPlayers(server);
         if (leaguePlayers) {
           // No need to use a function for the setLeaguePlayers but doing it just to show
           // that the argument is the current state of leaguePlayers.
           setLeaguePlayers((leaguePlayers) => {
-            // console.log('using a FUNCTION for the set league players, argument is ' +
-            //   JSON.stringify(currentLeaguePlayers))
             return leaguePlayers
           });
         } else {
@@ -50,7 +46,7 @@ function useAddPlayer(seasonId: number,
       }
       try {
         setIsLoading(true);
-        const season = await seasonClient.getSeason(seasonId, navigate);
+        const season = await seasonClient.getSeason(server, seasonId);
         if (season && season.players) {
           setSeasonPlayers(season.players);
         }
@@ -84,7 +80,7 @@ function useAddPlayer(seasonId: number,
           annualTocParticipant: e.target.elements.tocId.checked,
           quarterlyTocParticipant: e.target.elements.qtocId.checked
         };
-        await gameClient.addExistingPlayer(gameId, existingPlayer, navigate);
+        await gameClient.addExistingPlayer(server, gameId, existingPlayer);
         // TODO call this asynchronously
         await refreshGame(gameId);
       } catch (error) {
@@ -109,7 +105,7 @@ function useAddPlayer(seasonId: number,
           annualTocParticipant: e.target.elements.tocId.checked,
           quarterlyTocParticipant: e.target.elements.qtocId.checked
         }
-        await gameClient.addNewPlayer(gameId, newPlayer, navigate);
+        await gameClient.addNewPlayer(server, gameId, newPlayer);
         // TODO call this asynchronously
         await refreshGame(gameId);
       } catch (error) {

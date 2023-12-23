@@ -1,26 +1,33 @@
 import {useEffect} from "react";
-import {NotificationData, NotificationDataBuilder} from "../model/NotificationDataBuilder";
+import {NotificationData} from "../model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
-import {getSeason} from "../../season/seasonUtils";
+import axios from "axios";
+import {clearToken, getToken, tokenExpired} from "../../utils/util";
+
+const server = axios.create({
+  baseURL: process.env.REACT_APP_SERVER_URL,
+  timeout: 30000
+});
 
 export default function useLeague(seasonId : number, newNotification: (n: NotificationData) => void) {
   const navigate = useNavigate();
-
   useEffect(() => {
-    async function init() {
-      try {
-        if (seasonId === 0) {
-          await getSeason(navigate, newNotification);
+    server.interceptors.request.use(config => {
+      const token = getToken();
+      if (token) {
+        if (tokenExpired(token)) {
+          clearToken();
+          navigate("/login");
+          return config;
         }
-      } catch (error) {
-        newNotification(new NotificationDataBuilder()
-          .withObj(error)
-          .withMessage("Problem getting season")
-          .build());
+        config.headers['Authorization'] = `Bearer ${token}`;
       }
-    }
-
-    init();
+      return config;
+    });
     // eslint-disable-next-line
   }, [])
+
+  return {
+    server
+  };
 }
