@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import seasonClient from "../../clients/seasonClient";
@@ -8,14 +8,13 @@ import {useNavigate} from "react-router-dom";
 import {getSeason} from "../seasonUtils";
 
 function useSeason(seasonId: number) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
+  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   useEffect(() => {
     async function init() {
       try {
-        setIsLoading(true);
+        toggleLoadingGlobal(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
           currentSeasonId = await getSeason(navigate, newNotification);
@@ -38,17 +37,13 @@ function useSeason(seasonId: number) {
           .withMessage(seasonId === 0 ? "Problem getting season" : `Problem getting seasion ${seasonId}`)
           .build());
       } finally {
-        setIsLoading(false);
+        toggleLoadingGlobal(false);
       }
     }
 
     init();
     // eslint-disable-next-line
   }, [])
-
-  return {
-    isLoading
-  };
 }
 
 export default useSeason;

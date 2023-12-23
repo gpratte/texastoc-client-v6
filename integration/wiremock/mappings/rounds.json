@@ -7,6 +7,7 @@
       },
       "response": {
         "status": 200,
+        "fixedDelayMilliseconds": 2000,
         "jsonBody": [
           {
             "name": "Round 1",
