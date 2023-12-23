@@ -29,12 +29,6 @@ function LeaguePlayers(props) {
         <tr key={id}>
           <td>
             {fullName}
-            {/*TODO*/}
-            {/*<Button variant="link" onClick={() => {*/}
-            {/*  leagueStore.dispatch({type: EDIT_LEAGUE_PLAYER, id: id});*/}
-            {/*}}>*/}
-            {/*  {fullName}*/}
-            {/*</Button>*/}
           </td>
           <td>{obfuscatedPhone}</td>
           <td>{obfuscatedEmail}</td>

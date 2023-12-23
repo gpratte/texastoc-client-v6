@@ -4,9 +4,11 @@ import gameClient from "../../clients/gameClient";
 import {GamePlayerData} from "../model/GameDataTypes";
 import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {useNavigate} from "react-router-dom";
+import {GameContext, GameContextType} from "../components/Game";
 
 function useEditPlayer(gamePlayer: GamePlayerData) {
-  const {newNotification, refreshGame} = useContext(LeagueContext) as LeagueContextType;
+  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
+  const {refreshGame} = useContext(GameContext) as GameContextType;
   const navigate = useNavigate();
 
   const [accordionOpen, setAccordionOpen] = useState(false);
