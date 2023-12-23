@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-19-spinner
+Show spinner when waiting on an api response.
+
 ### step-18-todos
 Clean up a bunch of small TODOs.
 
