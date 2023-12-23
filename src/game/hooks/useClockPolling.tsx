@@ -1,16 +1,18 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import clockClient from "../../clients/clockClient";
 import {Round} from "../../league/model/LeagueDataTypes";
 import {ClockData} from "../model/ClockDataTypes";
+import {LeagueContext, LeagueContextType} from "../../league/components/League";
 
 function useClockPolling(gameId: number) {
+  const {server} = useContext(LeagueContext) as LeagueContextType;
   const [clock, setClock] = useState<ClockData>(initializeClock());
   const navigate = useNavigate();
 
   const checkClock = async () => {
     try {
-      const currentClock: ClockData | null = await clockClient.getClock(gameId, navigate);
+      const currentClock: ClockData | null = await clockClient.getClock(server, gameId, navigate);
       if (currentClock) {
         setClock(currentClock);
       }
@@ -28,22 +30,22 @@ function useClockPolling(gameId: number) {
   }, [])
 
   const stepBack = () => {
-    clockClient.stepBack(gameId, navigate);
+    clockClient.stepBack(server, gameId, navigate);
   }
   const back = () => {
-    clockClient.back(gameId, navigate);
+    clockClient.back(server, gameId, navigate);
   }
   const pause = () => {
-    clockClient.pause(gameId, navigate);
+    clockClient.pause(server, gameId, navigate);
   }
   const resume = () => {
-    clockClient.resume(gameId, navigate);
+    clockClient.resume(server, gameId, navigate);
   }
   const forward = () => {
-    clockClient.forward(gameId, navigate);
+    clockClient.forward(server, gameId, navigate);
   }
   const stepForward = () => {
-    clockClient.stepForward(gameId, navigate);
+    clockClient.stepForward(server, gameId, navigate);
   }
 
   return {

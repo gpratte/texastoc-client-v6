@@ -4,12 +4,10 @@ import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import seasonClient from "../../clients/seasonClient";
 import leagueStore from "../../league/redux/leagueStore";
 import {refreshSeasonAction} from "../redux/seasonActions";
-import {useNavigate} from "react-router-dom";
 import {getSeason} from "../seasonUtils";
 
 function useSeason(seasonId: number) {
-  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
-  const navigate = useNavigate();
+  const {server, toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
 
   useEffect(() => {
     async function init() {
@@ -17,11 +15,11 @@ function useSeason(seasonId: number) {
         toggleLoadingGlobal(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
-          currentSeasonId = await getSeason(navigate, newNotification);
+          currentSeasonId = await getSeason(server, newNotification);
         }
 
         if (currentSeasonId !== 0) {
-          const season = await seasonClient.getSeason(currentSeasonId, navigate);
+          const season = await seasonClient.getSeason(server, currentSeasonId);
           if (season) {
             leagueStore.dispatch(refreshSeasonAction(season));
           } else {

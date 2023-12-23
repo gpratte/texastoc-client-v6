@@ -20,6 +20,11 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-20-axios-request-interceptor
+An axios request interceptor now sets auth header. It also checks for expired token.
+If the token is expired then it uses the react router to navigate to the *login* page.
+Hence the axios instead/interceptor had to be moved into a react hook.
+
 ### step-19-spinner
 Show spinner when waiting on an api response.
 

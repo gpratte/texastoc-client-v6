@@ -1,8 +1,8 @@
-import {server} from '../utils/api';
 import {setToken, clearToken} from '../utils/util';
+import {AxiosInstance} from "axios";
 
 const loginClient = {
-  login: async (email: string, password: string) => {
+  login: async (server: AxiosInstance, email: string, password: string) => {
     const result = await server.post('/api/v4/login',
       {email: email, password: password},
       {

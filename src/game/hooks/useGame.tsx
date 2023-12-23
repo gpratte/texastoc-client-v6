@@ -6,13 +6,11 @@ import {NotificationDataBuilder, NotificationType} from "../../league/model/Noti
 import {LeagueContextType, LeagueContext} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import refreshGameAction from "../redux/refreshGameAction";
-import {useNavigate} from "react-router-dom";
 import {convertDateToMoment, convertDateToString} from "../../utils/util";
 import {getSeason} from "../../season/seasonUtils";
 
 function useGame(seasonId: number, gameId : number) {
-  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
-  const navigate = useNavigate();
+  const {server, toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
   const { editGameId } = useParams();
 
   useEffect(() => {
@@ -21,11 +19,11 @@ function useGame(seasonId: number, gameId : number) {
         toggleLoadingGlobal(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
-          currentSeasonId = await getSeason(navigate, newNotification);
+          currentSeasonId = await getSeason(server, newNotification);
         }
         let currentGameId: number = editGameId ? parseInt(editGameId) : gameId;
         if (currentSeasonId !== 0 && currentGameId === 0) {
-          const games : Array<GameData> | null = await gameClient.getGames(currentSeasonId, navigate);
+          const games : Array<GameData> | null = await gameClient.getGames(server, currentSeasonId);
           if (games === null) {
             return;
           }
@@ -52,7 +50,7 @@ function useGame(seasonId: number, gameId : number) {
             }
           }
         }
-        const game: GameData | null = await gameClient.getGame(currentGameId, navigate);
+        const game: GameData | null = await gameClient.getGame(server, currentGameId);
         if (game) {
           leagueStore.dispatch(refreshGameAction(game));
         } else {
@@ -78,7 +76,7 @@ function useGame(seasonId: number, gameId : number) {
   const refreshGame = async (gameId : number): Promise<void> => {
     try {
       toggleLoadingGlobal(true);
-      const game = await gameClient.getGame(gameId, navigate);
+      const game = await gameClient.getGame(server, gameId);
       if (game) {
         leagueStore.dispatch(refreshGameAction(game));
       } else {

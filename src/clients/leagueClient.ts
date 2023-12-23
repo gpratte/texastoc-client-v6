@@ -1,105 +1,22 @@
-import {server} from "../utils/api";
-import axios, {AxiosError} from "axios";
-import {clearToken, getToken, tokenExpired} from "../utils/util";
-import {NavigateFunction} from "react-router-dom";
+import {AxiosInstance} from "axios";
 import {LeaguePlayerData, Round, Settings} from "../league/model/LeagueDataTypes";
 
 const leagueClient = {
-  getPlayers: async (navigate: NavigateFunction): Promise<Array<LeaguePlayerData> | null> => {
-    const token = getToken();
-    if (!token) {
-      navigate("/login");
-      return null;
-    }
-    try {
-      const result = await server.get('/api/v4/players', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      return result.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
-          clearToken();
-          navigate("/login");
-          throw new Error("Token expired");
-        }
-      }
-      throw error;
-    }
+  getPlayers: async (server: AxiosInstance): Promise<Array<LeaguePlayerData> | null> => {
+    const result = await server.get('/api/v4/players');
+    return result.data;
   },
-  getPlayer: async (id: number, navigate: NavigateFunction): Promise<LeaguePlayerData | null> => {
-    const token = getToken();
-    if (!token) {
-      navigate("/login");
-      return null;
-    }
-    try {
-      const result = await server.get(`/api/v4/players/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      return result.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
-          clearToken();
-          navigate("/login");
-          throw new Error("Token expired");
-        }
-      }
-      throw error;
-    }
+  getPlayer: async (server: AxiosInstance, id: number): Promise<LeaguePlayerData | null> => {
+    const result = await server.get(`/api/v4/players/${id}`);
+    return result.data;
   },
-  getRounds: async (navigate: NavigateFunction): Promise<Array<Round> | null> => {
-    const token = getToken();
-    if (!token) {
-      navigate("/login");
-      return null;
-    }
-    try {
-      const result = await server.get('/api/v4/clock/rounds', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      return result.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
-          clearToken();
-          navigate("/login");
-          throw new Error("Token expired");
-        }
-      }
-      throw error;
-    }
+  getRounds: async (server: AxiosInstance): Promise<Array<Round> | null> => {
+    const result = await server.get('/api/v4/clock/rounds');
+    return result.data;
   },
-  getSettings: async (navigate: NavigateFunction): Promise<Settings | null> => {
-    const token = getToken();
-    if (!token) {
-      navigate("/login");
-      return null;
-    }
-    try {
-      const result = await server.get('/api/v4/settings', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      return result.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if ((error as AxiosError).response?.status === 403 && tokenExpired(token)) {
-          clearToken();
-          navigate("/login");
-          throw new Error("Token expired");
-        }
-      }
-      throw error;
-    }
+  getSettings: async (server: AxiosInstance): Promise<Settings | null> => {
+    const result = await server.get('/api/v4/settings');
+    return result.data;
   }
 }
 
