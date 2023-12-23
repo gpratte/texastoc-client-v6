@@ -3,7 +3,6 @@ import _ from "lodash";
 import React, {createContext, useState} from "react";
 import { connect } from "react-redux";
 import {Accordion} from "react-bootstrap";
-import Loading from "../../common/components/Loading";
 import {GameData} from "../model/GameDataTypes";
 import useGame from "../hooks/useGame";
 import {gameOver} from "../gameUtils";
@@ -24,7 +23,6 @@ function Game(props) {
   const isGameOver = gameOver(game.players);
 
   const {
-    isLoading,
     refreshGame
   } = useGame(seasonId || 0, game.id || 0);
 
@@ -36,7 +34,6 @@ function Game(props) {
 
   return (
     <GameContext.Provider value={{refreshGame}}>
-      <Loading isLoading={isLoading}/>
       <div>
         <Accordion flush>
           <Accordion.Item eventKey="0">

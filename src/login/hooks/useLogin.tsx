@@ -5,11 +5,12 @@ import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import {useNavigate} from "react-router-dom";
 
 export default function useLogin() {
-  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
+  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   const login = async (email: string, password: string) => {
     try {
+      toggleLoadingGlobal(true);
       await loginClient.login(email, password);
       navigate("/home");
     } catch (error) {
@@ -17,6 +18,8 @@ export default function useLogin() {
         .withObj(error)
         .withMessage("Problem loggin in")
         .build());
+    } finally {
+      toggleLoadingGlobal(false);
     }
   }
 

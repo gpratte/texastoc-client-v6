@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {NotificationDataBuilder, NotificationType} from "../model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../components/League";
 import leagueStore from "../../league/redux/leagueStore";
@@ -8,14 +8,13 @@ import {LeaguePlayerData} from "../model/LeagueDataTypes";
 import refreshLeaguePlayersAction from "../redux/refreshLeaguePlayersAction";
 
 export default function useLeaguePlayers() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
+  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
 
   useEffect(() => {
     async function init() {
       try {
-        setIsLoading(true);
+        toggleLoadingGlobal(true);
         const leaguePlayers : Array<LeaguePlayerData> | null = await leagueClient.getPlayers(navigate);
         if (leaguePlayers) {
           leagueStore.dispatch(refreshLeaguePlayersAction(leaguePlayers));
@@ -31,15 +30,11 @@ export default function useLeaguePlayers() {
           .withMessage('Problem getting league players')
           .build());
       } finally {
-        setIsLoading(false);
+        toggleLoadingGlobal(false);
       }
     }
 
     init();
     // eslint-disable-next-line
   }, [])
-
-  return {
-    isLoading
-  };
 }

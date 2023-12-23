@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import gameClient from "../../clients/gameClient";
 import {GameData} from "../model/GameDataTypes";
@@ -11,15 +11,14 @@ import {convertDateToMoment, convertDateToString} from "../../utils/util";
 import {getSeason} from "../../season/seasonUtils";
 
 function useGame(seasonId: number, gameId : number) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {newNotification} = useContext(LeagueContext) as LeagueContextType;
+  const {toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
   const { editGameId } = useParams();
 
   useEffect(() => {
     async function init() {
       try {
-        setIsLoading(true);
+        toggleLoadingGlobal(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
           currentSeasonId = await getSeason(navigate, newNotification);
@@ -68,7 +67,7 @@ function useGame(seasonId: number, gameId : number) {
           .withMessage("Problem getting game")
           .build());
       } finally {
-        setIsLoading(false);
+        toggleLoadingGlobal(false);
       }
     }
 
@@ -78,7 +77,7 @@ function useGame(seasonId: number, gameId : number) {
 
   const refreshGame = async (gameId : number): Promise<void> => {
     try {
-      setIsLoading(true);
+      toggleLoadingGlobal(true);
       const game = await gameClient.getGame(gameId, navigate);
       if (game) {
         leagueStore.dispatch(refreshGameAction(game));
@@ -94,12 +93,11 @@ function useGame(seasonId: number, gameId : number) {
         .withMessage("Problem getting game")
         .build());
     } finally {
-      setIsLoading(false);
+      toggleLoadingGlobal(false);
     }
   }
 
   return {
-    isLoading,
     refreshGame
   };
 }

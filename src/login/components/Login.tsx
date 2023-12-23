@@ -1,13 +1,11 @@
-import React, {useContext} from "react";
+import React from "react";
 import {getToken} from "../../utils/util";
 import {Form} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import {Link, Navigate} from "react-router-dom";
-import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import useLogin from "../hooks/useLogin";
 
 const Login = () => {
-  const {toggleLoadingGlobal} = useContext(LeagueContext) as LeagueContextType;
   const {
     login,
   } = useLogin();
@@ -20,9 +18,7 @@ const Login = () => {
     };
     const email = target.emailId.value;
     const password = target.passwordId.value;
-    toggleLoadingGlobal(true);
     login(email, password);
-    toggleLoadingGlobal(false);
   }
 
   if (getToken()) {

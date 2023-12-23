@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import './season.css';
 import {connect} from "react-redux";
 import _ from "lodash";
-import {Link} from "react-router-dom";
-import {Accordion, Button, Tab, Tabs} from "react-bootstrap";
+import {Accordion, Tab, Tabs} from "react-bootstrap";
 import {SeasonData} from "../model/SeasonDataTypes";
 import SeasonDetails from "./SeasonDetails";
 import SeasonStandings from "./SeasonStandings";
@@ -24,11 +23,12 @@ function Season(props) {
     return (
       <>
         <h1>No Season</h1>
-        <p>
-          <Link to="/season/new">
-            <Button variant="outline-secondary"> Create a new season </Button>
-          </Link>
-        </p>
+        {/*TODO*/}
+        {/*/!*<p>*!/*/}
+        {/*  <Link to="/season/new">*/}
+        {/*    <Button variant="outline-secondary"> Create a new season </Button>*/}
+        {/*  </Link>*/}
+        {/*</p>*/}
       </>
     )
   }
