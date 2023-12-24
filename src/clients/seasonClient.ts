@@ -10,7 +10,7 @@ const seasonClient = {
     }
     return 0;
   },
-  getSeason: async (server: AxiosInstance, id: number): Promise<SeasonData | null> => {
+  getSeason: async (server: AxiosInstance, id: number): Promise<SeasonData> => {
     const result = await server.get(`/api/v4/seasons/${id}`);
     return result.data;
   }

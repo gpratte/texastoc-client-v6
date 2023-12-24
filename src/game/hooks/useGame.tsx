@@ -2,12 +2,12 @@ import {useContext, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import gameClient from "../../clients/gameClient";
 import {GameData} from "../model/GameDataTypes";
-import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {LeagueContextType, LeagueContext} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import refreshGameAction from "../redux/refreshGameAction";
 import {convertDateToMoment, convertDateToString} from "../../utils/util";
-import {getSeason} from "../../season/seasonUtils";
+import {getSeasonId} from "../../season/seasonUtils";
 
 function useGame(seasonId: number, gameId : number) {
   const {server, toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
@@ -19,14 +19,11 @@ function useGame(seasonId: number, gameId : number) {
         toggleLoadingGlobal(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
-          currentSeasonId = await getSeason(server, newNotification);
+          currentSeasonId = await getSeasonId(server, newNotification);
         }
         let currentGameId: number = editGameId ? parseInt(editGameId) : gameId;
         if (currentSeasonId !== 0 && currentGameId === 0) {
           const games : Array<GameData> | null = await gameClient.getGames(server, currentSeasonId);
-          if (games === null) {
-            return;
-          }
           // Use the first unfinalized game (only one should be unfinalized)
           const unfinalizedGame = games.find(g => {
             return !g.finalized;
@@ -50,15 +47,8 @@ function useGame(seasonId: number, gameId : number) {
             }
           }
         }
-        const game: GameData | null = await gameClient.getGame(server, currentGameId);
-        if (game) {
-          leagueStore.dispatch(refreshGameAction(game));
-        } else {
-          newNotification(new NotificationDataBuilder()
-            .withMessage(`Problem getting game ${currentGameId}`)
-            .withType(NotificationType.ERROR)
-            .build());
-        }
+        const game: GameData = await gameClient.getGame(server, currentGameId);
+        leagueStore.dispatch(refreshGameAction(game));
       } catch (error) {
         newNotification(new NotificationDataBuilder()
           .withObj(error)
@@ -77,14 +67,7 @@ function useGame(seasonId: number, gameId : number) {
     try {
       toggleLoadingGlobal(true);
       const game = await gameClient.getGame(server, gameId);
-      if (game) {
-        leagueStore.dispatch(refreshGameAction(game));
-      } else {
-        newNotification(new NotificationDataBuilder()
-          .withMessage(`Problem getting game ${gameId}`)
-          .withType(NotificationType.ERROR)
-          .build());
-      }
+      leagueStore.dispatch(refreshGameAction(game));
     } catch (error) {
       newNotification(new NotificationDataBuilder()
         .withObj(error)

@@ -21,8 +21,8 @@ export default function useLeague(seasonId : number, newNotification: (n: Notifi
         } else {
           config.headers['Authorization'] = `Bearer ${token}`;
         }
-      } else if ("/api/v4/login" !== config.url) {
-        // only login does not need a token
+      } else if ("/api/v4/login" !== config.url && "/api/v4/settings" !== config.url) {
+        // login and settings do not need a token but all others do
         navigate("/login");
       }
       return config;

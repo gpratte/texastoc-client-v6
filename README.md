@@ -20,6 +20,11 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-22-new-game
+Can now add a new game. Also cleaned up the calls to the api client functions since they
+no longer return null (they either succeed or throw an error which is caught and shown
+as a notification).
+
 ### step-21-nav-bar-collapse
 Could not get the nav bar to collapse properly so for the time 
 being resurrected the v5 nav bar and put controls on the left.

@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import {NotificationDataBuilder, NotificationType} from "../model/NotificationDataBuilder";
+import {NotificationDataBuilder} from "../model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import leagueClient from "../../clients/leagueClient";
@@ -13,15 +13,8 @@ export default function useRounds() {
     async function init() {
       try {
         toggleLoadingGlobal(true);
-        const rounds : Array<Round> | null = await leagueClient.getRounds(server);
-        if (rounds) {
-          leagueStore.dispatch(refreshRoundsAction(rounds));
-        } else {
-          newNotification(new NotificationDataBuilder()
-            .withMessage('Problem getting rounds')
-            .withType(NotificationType.ERROR)
-            .build());
-        }
+        const rounds : Array<Round> = await leagueClient.getRounds(server);
+        leagueStore.dispatch(refreshRoundsAction(rounds));
       } catch (error) {
         newNotification(new NotificationDataBuilder()
           .withObj(error)

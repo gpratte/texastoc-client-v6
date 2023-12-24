@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import gameClient from "../../clients/gameClient";
@@ -12,19 +12,12 @@ export default function useGames(seasonId: number) {
   useEffect(() => {
     async function init() {
       try {
-        const games : Array<GameData> | null = await gameClient.getGames(server, seasonId);
-        if (games) {
-          leagueStore.dispatch(refreshGamesAction(games));
-        } else {
-          newNotification(new NotificationDataBuilder()
-            .withMessage(`Problem getting games ${seasonId}`)
-            .withType(NotificationType.ERROR)
-            .build());
-        }
+        const games : Array<GameData> = await gameClient.getGames(server, seasonId);
+        leagueStore.dispatch(refreshGamesAction(games));
       } catch (error) {
         newNotification(new NotificationDataBuilder()
           .withObj(error)
-          .withMessage(`Problem getting games ${seasonId}`)
+          .withMessage(`Problem getting games for season ${seasonId}`)
           .build());
       }
     }

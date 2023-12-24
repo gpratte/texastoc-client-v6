@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import leagueStore from "../../league/redux/leagueStore";
 import quarterlySeasonClient from "../../clients/quarterlySeasonClient";
@@ -12,14 +12,7 @@ export default function useQuarterlySeasons(seasonId: number) {
     async function init() {
       try {
         const quarterlies = await quarterlySeasonClient.getQuarterlies(server, seasonId);
-        if (quarterlies) {
-          leagueStore.dispatch(refreshQuarterlySeasonAction(quarterlies));
-        } else {
-          newNotification(new NotificationDataBuilder()
-            .withMessage(`Problem getting quarterly seasons ${seasonId}`)
-            .withType(NotificationType.ERROR)
-            .build());
-        }
+        leagueStore.dispatch(refreshQuarterlySeasonAction(quarterlies));
       } catch (error) {
         newNotification(new NotificationDataBuilder()
           .withObj(error)

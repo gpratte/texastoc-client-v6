@@ -1,10 +1,10 @@
 import {useContext, useEffect} from "react";
-import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import seasonClient from "../../clients/seasonClient";
 import leagueStore from "../../league/redux/leagueStore";
 import {refreshSeasonAction} from "../redux/seasonActions";
-import {getSeason} from "../seasonUtils";
+import {getSeasonId} from "../seasonUtils";
 
 function useSeason(seasonId: number) {
   const {server, toggleLoadingGlobal, newNotification} = useContext(LeagueContext) as LeagueContextType;
@@ -15,19 +15,12 @@ function useSeason(seasonId: number) {
         toggleLoadingGlobal(true);
         let currentSeasonId = seasonId;
         if (currentSeasonId === 0) {
-          currentSeasonId = await getSeason(server, newNotification);
+          currentSeasonId = await getSeasonId(server, newNotification);
         }
 
         if (currentSeasonId !== 0) {
           const season = await seasonClient.getSeason(server, currentSeasonId);
-          if (season) {
-            leagueStore.dispatch(refreshSeasonAction(season));
-          } else {
-            newNotification(new NotificationDataBuilder()
-              .withMessage(`Problem getting season ${seasonId}`)
-              .withType(NotificationType.ERROR)
-              .build());
-          }
+          leagueStore.dispatch(refreshSeasonAction(season));
         }
       } catch (error) {
         newNotification(new NotificationDataBuilder()
