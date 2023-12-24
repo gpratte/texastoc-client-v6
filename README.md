@@ -20,6 +20,10 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-21-nav-bar-collapse
+Could not get the nav bar to collapse properly so for the time 
+being resurrected the v5 nav bar and put controls on the left.
+
 ### step-20-axios-request-interceptor
 An axios request interceptor now sets auth header. It also checks for expired token.
 If the token is expired then it uses the react router to navigate to the *login* page.
