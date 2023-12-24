@@ -18,9 +18,12 @@ export default function useLeague(seasonId : number, newNotification: (n: Notifi
         if (tokenExpired(token)) {
           clearToken();
           navigate("/login");
-          return config;
+        } else {
+          config.headers['Authorization'] = `Bearer ${token}`;
         }
-        config.headers['Authorization'] = `Bearer ${token}`;
+      } else if ("/api/v4/login" !== config.url) {
+        // only login does not need a token
+        navigate("/login");
       }
       return config;
     });
