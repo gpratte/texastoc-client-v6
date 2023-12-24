@@ -62,3 +62,8 @@ export type GameData = {
   players: Array<GamePlayerData>;
   payouts: Array<GamePayout>;
 }
+export type NewGameData = {
+  date: string;
+  hostId: number;
+  transportRequired: boolean
+}

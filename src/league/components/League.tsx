@@ -1,13 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/league.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, {createContext} from "react";
 import {connect} from "react-redux";
+import {Route, Routes} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import React, {createContext} from "react";
-import {Route, Routes} from "react-router-dom";
 import Home from "../../home/components/Home";
 import Game from "../../game/components/Game";
+import NewGame from "../../game/components/NewGame";
 import Season from "../../season/components/Season";
 import Loading from "../../common/components/Loading";
 import Login from "../../login/components/Login";
@@ -81,6 +82,7 @@ function League(props) {
                 <Route path='/login' element={<Login />} />
                 <Route path="/current-game" element={<Game seasonId={seasonId}/>} />
                 <Route path="/current-game/:editGameId" element={<Game seasonId={seasonId}/>} />
+                <Route path="/new-game" element={<NewGame />} />
                 <Route path="/season" element={<Season seasonId={seasonId}/>} />
                 <Route path="/players" element={<LeaguePlayers />} />
                 <Route path="/rounds" element={<Rounds />} />

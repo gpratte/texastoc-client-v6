@@ -19,7 +19,7 @@ function ErrorNotification(props: {notification: NotificationData | undefined,
       <Toast.Header closeButton={false}>
         <strong className="me-auto">{props.notification.type}</strong>
         <Button variant={"secondary"}
-                onClick={() => props.deleteNotification(props.notification!.id)}>Close</Button>
+                onClick={() => props.closeNotification(props.notification!.id)}>Close</Button>
       </Toast.Header>
       <Toast.Body>{props.notification.message}</Toast.Body>
     </Toast>

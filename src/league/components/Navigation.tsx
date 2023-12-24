@@ -33,11 +33,11 @@ function Navigation (props: { notifications: Array<NotificationData>, showNotifi
         </Dropdown>
         <Dropdown className={'nav-bar-right'}>
           <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
-            <i className="fas fa-bars"/>
+            <i className="nav-home fas fa-bars"/>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item>
-              <Link to="/game/new">
+              <Link to="/new-game">
                 <Button variant="link">New Game</Button>
               </Link>
             </Dropdown.Item>

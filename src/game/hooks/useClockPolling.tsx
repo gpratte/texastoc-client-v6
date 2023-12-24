@@ -13,11 +13,10 @@ function useClockPolling(gameId: number) {
   const checkClock = async () => {
     try {
       const currentClock: ClockData | null = await clockClient.getClock(server, gameId, navigate);
-      if (currentClock) {
-        setClock(currentClock);
-      }
+      setClock(currentClock);
     } catch (error) {
-      // Do nothing
+      // @ts-ignore
+      console.log(`error getting clock ${error.message}`)
     }
   };
 

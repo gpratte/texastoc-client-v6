@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {NotificationData, NotificationDataBuilder, NotificationType} from "../model/NotificationDataBuilder";
+import {useState} from "react";
+import {NotificationData} from "../model/NotificationDataBuilder";
 
 function useNotifications(delay = 2500) {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
@@ -50,17 +50,6 @@ function useNotifications(delay = 2500) {
   const toggleLoadingGlobal = (show: boolean): void => {
     setIsGlobalLoading(show);
   }
-
-  // toggle the toast
-  useEffect(() => {
-    let interval = setInterval(() => {
-      newNotification(new NotificationDataBuilder()
-        .withMessage("tick " + Date.now())
-        .withType(NotificationType.INFO)
-        .build());
-    }, delay);
-    return () => clearInterval(interval);
-  })
 
   return {
     newNotification,

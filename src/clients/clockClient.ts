@@ -3,7 +3,7 @@ import {ClockData} from "../game/model/ClockDataTypes";
 import {AxiosInstance} from "axios";
 
 const clockClient = {
-  getClock: async (server: AxiosInstance, gameId: number, navigate: NavigateFunction): Promise<ClockData | null> => {
+  getClock: async (server: AxiosInstance, gameId: number, navigate: NavigateFunction): Promise<ClockData> => {
     const result = await server.get(`/api/v4/games/${gameId}/clock`);
     return result.data;
   },

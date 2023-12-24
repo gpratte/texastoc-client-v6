@@ -5,7 +5,7 @@ import leagueClient from "../../clients/leagueClient";
 import {LeagueContext, LeagueContextType} from "../../league/components/League";
 import {LeaguePlayerData} from "../../league/model/LeagueDataTypes";
 import {SeasonPlayerData} from "../../season/model/SeasonDataTypes";
-import {NotificationDataBuilder, NotificationType} from "../../league/model/NotificationDataBuilder";
+import {NotificationDataBuilder} from "../../league/model/NotificationDataBuilder";
 import {AddExistingPlayerData, AddNewPlayerData} from "../model/GameDataTypes";
 
 function useAddPlayer(seasonId: number,
@@ -23,19 +23,10 @@ function useAddPlayer(seasonId: number,
     async function init() {
       try {
         setIsLoading(true);
-        const leaguePlayers : Array<LeaguePlayerData> | null = await leagueClient.getPlayers(server);
-        if (leaguePlayers) {
-          // No need to use a function for the setLeaguePlayers but doing it just to show
-          // that the argument is the current state of leaguePlayers.
-          setLeaguePlayers((leaguePlayers) => {
-            return leaguePlayers
-          });
-        } else {
-          newNotification(new NotificationDataBuilder()
-            .withMessage('Problem getting league players')
-            .withType(NotificationType.ERROR)
-            .build());
-        }
+        const currentLeaguePlayers : Array<LeaguePlayerData> = await leagueClient.getPlayers(server);
+        // No need to use a function for the setLeaguePlayers but doing it just to show
+        // that it can be done.
+        setLeaguePlayers(() => currentLeaguePlayers);
       } catch (error) {
         newNotification(new NotificationDataBuilder()
           .withObj(error)
@@ -47,7 +38,7 @@ function useAddPlayer(seasonId: number,
       try {
         setIsLoading(true);
         const season = await seasonClient.getSeason(server, seasonId);
-        if (season && season.players) {
+        if (season.players) {
           setSeasonPlayers(season.players);
         }
       } catch (error) {
