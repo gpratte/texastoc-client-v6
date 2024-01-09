@@ -1,8 +1,10 @@
 import React from "react";
-import {gameOver} from "../gameUtils";
+import {areAllPlacesAssigned} from "../gameUtils";
 import {Button} from "react-bootstrap";
 import useFinalize from "../hooks/useFinalize";
 import {GameData} from "../model/GameDataTypes";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 // @ts-ignore
 function Finalize(props) {
@@ -14,17 +16,26 @@ function Finalize(props) {
     unfinalize
   } = useFinalize(game.id);
 
-  const isGameOver = gameOver(game.players);
+  const isAllPlacesAssigned = areAllPlacesAssigned(game.players);
 
   if (game.finalized) {
     return (
-      <Button variant="primary" onClick={unfinalize}>
-        <i className="fas fa-lock"/>
-      </Button>
+      <OverlayTrigger
+        placement={"top"}
+        overlay={
+          <Tooltip>
+            Press to unlock
+          </Tooltip>
+        }
+      >
+        <Button variant="primary" onClick={unfinalize}>
+          <i className="fas fa-lock"/>
+        </Button>
+      </OverlayTrigger>
     )
   }
 
-  if (!isGameOver) {
+  if (!isAllPlacesAssigned) {
     return null;
   }
 

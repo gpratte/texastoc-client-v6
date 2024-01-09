@@ -58,7 +58,7 @@ function Season(props) {
           <Quarters seasonId={season.id}/>
         </Tab>
         <Tab className="style2" eventKey="games" title="&nbsp;&nbsp;&nbsp;Games&nbsp;&nbsp;&nbsp;">
-          <Games seasonId={season.id}/>
+          <Games seasonId={season?.id}/>
         </Tab>
       </Tabs>
       {/*<Finalize seasonId={season.id} finalized={season.finalized}/>*/}

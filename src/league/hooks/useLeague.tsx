@@ -9,7 +9,7 @@ const server = axios.create({
   timeout: 30000
 });
 
-export default function useLeague(seasonId : number, newNotification: (n: NotificationData) => void) {
+export default function useLeague(seasonId : number, newNotification: (n: NotificationData) => void, routePrefix: string) {
   const navigate = useNavigate();
   useEffect(() => {
     server.interceptors.request.use(config => {
@@ -17,13 +17,13 @@ export default function useLeague(seasonId : number, newNotification: (n: Notifi
       if (token) {
         if (tokenExpired(token)) {
           clearToken();
-          navigate("/login");
+          navigate(`${routePrefix}/login`);
         } else {
           config.headers['Authorization'] = `Bearer ${token}`;
         }
       } else if ("/api/v4/login" !== config.url && "/api/v4/settings" !== config.url) {
         // login and settings do not need a token but all others do
-        navigate("/login");
+        navigate(`${routePrefix}/login`);
       }
       return config;
     });
