@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-23-prefix-route-path
+Pick up the prefix for the route path if set in the .env* files.
+
 ### step-22-new-game
 Can now add a new game. Also cleaned up the calls to the api client functions since they
 no longer return null (they either succeed or throw an error which is caught and shown
