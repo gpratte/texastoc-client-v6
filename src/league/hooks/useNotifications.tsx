@@ -37,6 +37,7 @@ function useNotifications(delay = 2500) {
   const deleteAllNotifications = (): void => {
     setNotification(undefined);
     setNotifications([]);
+    setShowNotifications(false);
   }
 
   const showNotificationsPanel = (): void => {
