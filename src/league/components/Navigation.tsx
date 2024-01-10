@@ -1,13 +1,11 @@
 import React, {useContext} from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Col from "react-bootstrap/Col";
 import {Link, useNavigate} from "react-router-dom";
 import {Badge, Button, Dropdown} from "react-bootstrap";
 import loginClient from "../../clients/loginClient";
 import {NotificationData} from "../model/NotificationDataBuilder";
 import {LeagueContext, LeagueContextType} from "./League";
 
-function Navigation (props: { notifications: Array<NotificationData>, showNotifications: () => void }) {
+function Navigation(props: { notifications: Array<NotificationData>, showNotifications: () => void }) {
   const {routePrefix} = useContext(LeagueContext) as LeagueContextType;
   const navigate = useNavigate();
   const signOut = () => {
@@ -16,14 +14,13 @@ function Navigation (props: { notifications: Array<NotificationData>, showNotifi
   }
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
-      <Col>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <Link to={`${routePrefix}/home`}>
+    <>
+      <div className="d-flex bg-black text-white">
+        <Link to={`${routePrefix}/home`} className={'flex-grow-1 ms-3 p-2'}>
           <i className="nav-home fa-solid fa-house"></i>
         </Link>
         &nbsp;&nbsp;&nbsp;
-        <Dropdown className={'nav-bar-right'}>
+        <Dropdown>
           <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
             <i className="nav-home fa-regular fa-user"></i>
           </Dropdown.Toggle>
@@ -46,16 +43,18 @@ function Navigation (props: { notifications: Array<NotificationData>, showNotifi
           </Dropdown.Menu>
         </Dropdown>
         {props.notifications.length === 0 &&
-          <i className="nav-home fa-solid fa-bell-slash"></i>
+          <span className={'p-2 me-3'}>
+              <i className="fa-solid fa-bell-slash"></i>
+            </span>
         }
         {props.notifications.length > 0 &&
-          <span style={{cursor: "pointer"}} onClick={() => props.showNotifications()}>
+          <span className={'p-2 me-3'} style={{cursor: "pointer"}} onClick={() => props.showNotifications()}>
             <i className="nav-home fa-solid fa-bell"></i>
             <Badge bg={"warning"}>{props.notifications.length}</Badge>
           </span>
         }
-      </Col>
-    </Navbar>
+      </div>
+    </>
   )
 }
 
