@@ -20,6 +20,9 @@ React version
 * _create-react-app_ installed react version 18 (as you can see by the react version in the package.json).
 
 ## Branches
+### step-24-flexbox-navigation-bar
+Use flexbox for navigation bar layout.
+
 ### step-23-prefix-route-path
 Pick up the prefix for the route path if set in the .env* files.
 
